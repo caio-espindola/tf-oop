@@ -1,4 +1,4 @@
-package game.entities;
+package game.entities.creatures;
 
 import game.levels.Battle;
 import game.entities.actions.Attack;

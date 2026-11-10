@@ -1,5 +1,6 @@
-package game.entities;
+package game.entities.heroes;
 
+import game.entities.Entity;
 import game.exceptions.InventoryFullException;
 import game.items.Equippable;
 import game.items.Inventory;

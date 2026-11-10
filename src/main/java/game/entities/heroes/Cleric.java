@@ -1,4 +1,4 @@
-package game.entities;
+package game.entities.heroes;
 
 import game.entities.actions.Heal;
 import game.entities.actions.Smite;

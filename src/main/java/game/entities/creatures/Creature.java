@@ -1,7 +1,7 @@
-package game.entities;
+package game.entities.creatures;
 
+import game.entities.Entity;
 import game.levels.Battle;
-import game.entities.actions.Action;
 
 public abstract class Creature extends Entity {
 

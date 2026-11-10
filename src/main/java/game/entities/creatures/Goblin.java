@@ -1,6 +1,5 @@
-package game.entities;
+package game.entities.creatures;
 
-import game.entities.actions.Action;
 import game.entities.actions.Attack;
 import game.entities.actions.Evade;
 import game.levels.Battle;

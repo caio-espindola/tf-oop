@@ -49,7 +49,7 @@ INIMIGOS:
  - Null Lich:
     HP: Muito Alto
     Mana: Muito Alto
-    Skills: Attack, Raise Dead, Steal Life, Ultimate: Power Word Kill
+    Skills: Attack, Raise Dead, Steal Life, Ultimate: Kill Process (wcs? fuga?)
     Trait: Necromancer - Não pode ser atacado enquanto existirem esqueletos vivos
 
 HEROIS:
@@ -59,26 +59,26 @@ HEROIS:
     Mana: bem baixo
     Skills: Attack, Block
     Skill desbloqueavel: Parry
-    Ultimate:
+    Ultimate: Try-Catch (Boogie-Woogie)
 
  - Archer:
     HP: medio
     Mana: baixo
     Skills: Arrow, Evade
     Skill desbloqueavel: Focus
-    Ultimate:
+    Ultimate: Parallel Reduce (Malevolent Shrine)
 
  - Mage:
     HP: baixo
     Mana: alto
     Skills: Magic Missile, Mage Shield
     Skill desbloqueavel: Hex
-    Ultimate:
+    Ultimate: Null Pointer (Hollow Purple)
 
  - Cleric:
     HP: medio
     Mana: medio
     Skills: Smite, Heal
     Skill desbloqueavel: Warding Zone
-    Ultimate:
+    Ultimate: Claude (mahoraga)
 
