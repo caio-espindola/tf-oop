@@ -3,7 +3,22 @@ Trabalho Final da disciplina de Programação Orientada a Objetos
 
 TO DO:
 
- - tudo lmao
+ - Implementar GUI (Mora)
+ - - criar as paginas para cada ambiente
+ - - criar as funcionalidades previstas no backend
+ - - deixar bonito (joga no claude)
+ - - conectar tudo pra entrega final
+ - Implementar Mecanicas (Caio)
+ - - Definir sistema de combate (calculo de dano etc)
+ - - Definir progressão (ver com o edson sobre as particularidades)
+ - - Criar a logica de combate dos inimigos
+ - - Criar o randomizador de encounters
+ - - Criar o randomizador de items
+ - - Criar os itens unicos
+ - - Criar as mecanicas de guilda (Loja, inventario global, etc)
+ - - Implementar os ataques
+ - - Implementar os efeitos
+
 
 IDEIAS:
 
