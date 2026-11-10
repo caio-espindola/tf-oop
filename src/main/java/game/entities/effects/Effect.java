@@ -1,5 +1,8 @@
 package game.entities.effects;
 
+import game.entities.Entity;
+import game.levels.Battle;
+
 public abstract class Effect implements Applicable{
 
     private int duration;
@@ -9,6 +12,8 @@ public abstract class Effect implements Applicable{
         this.duration = duration;
         this.name = "Effect";
     }
+
+    public abstract boolean apply(Battle b, Entity e);
 
     public boolean passDuration(){
 

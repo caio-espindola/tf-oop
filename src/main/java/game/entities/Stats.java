@@ -4,6 +4,13 @@ public class Stats {
     
     private int str, dex, intl, pie;
 
+    public enum stats {
+        STR,
+        DEX,
+        INT,
+        PIE
+    }
+
     public int getSTR(){
         return this.str;
     }

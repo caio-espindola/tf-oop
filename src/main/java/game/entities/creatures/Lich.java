@@ -1,6 +1,7 @@
 package game.entities.creatures;
 
 import game.entities.actions.Attack;
+import game.entities.actions.FurubeYuraYura;
 import game.entities.actions.RaiseDead;
 import game.entities.actions.StealLife;
 import game.entities.effects.Necromancer;
@@ -21,7 +22,7 @@ public class Lich extends Creature {
         this.setSkill(0, new Attack());
         this.setSkill(1, new RaiseDead());
         this.setSkill(2, new StealLife());
-        this.setSkill(3, );
+        this.setSkill(3, new );
 
         this.addEffect(new Necromancer(-1));
 

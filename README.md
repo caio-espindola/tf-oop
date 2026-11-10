@@ -18,6 +18,7 @@ TO DO:
  - - Criar as mecanicas de guilda (Loja, inventario global, etc)
  - - Implementar os ataques
  - - Implementar os efeitos
+ - - Implementar save + load
 
 
 IDEIAS:
@@ -64,7 +65,7 @@ INIMIGOS:
  - Null Lich:
     HP: Muito Alto
     Mana: Muito Alto
-    Skills: Attack, Raise Dead, Steal Life, Ultimate: Kill Process (wcs? fuga?)
+    Skills: Attack, Raise Dead, Steal Life, Ultimate: 
     Trait: Necromancer - Não pode ser atacado enquanto existirem esqueletos vivos
 
 HEROIS:

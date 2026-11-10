@@ -1,7 +1,6 @@
 package game.entities.heroes;
 
-import game.entities.actions.Heal;
-import game.entities.actions.Smite;
+import game.entities.actions.*;
 import game.levels.Battle;
 
 public class Cleric extends Hero {
@@ -20,6 +19,22 @@ public class Cleric extends Hero {
         this.setSkill(1, new Heal());
         this.setSkill(2, null);
         this.setSkill(3, null);
+
+    }
+
+    public void levelUp(){
+
+        this.setLevel(this.getLevel() + 1);
+
+        if (this.getLevel() == 2){
+
+            this.setSkill(2, new WardingZone());
+
+        } else if (this.getLevel() == 3){
+
+            this.setSkill(3, new FurubeYuraYura());
+
+        }
 
     }
 

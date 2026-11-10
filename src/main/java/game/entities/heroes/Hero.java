@@ -2,14 +2,14 @@ package game.entities.heroes;
 
 import game.entities.Entity;
 import game.exceptions.InventoryFullException;
-import game.items.Equippable;
-import game.items.Inventory;
-import game.items.Item;
+import game.items.*;
 import game.levels.Battle;
 
 public abstract class Hero extends Entity {
 
-    public Inventory<Item> inventory;
+    private Weapon weapon;
+    private Armor armor;
+    private Amulet amulet;
     private int xp;
 
     public Hero(int max_hp, int max_mana, int defense, int level){
@@ -24,30 +24,51 @@ public abstract class Hero extends Entity {
         return xp;
     }
 
-    public boolean addXP(){
+    public boolean addXP(int amount){
+
+        this.xp += amount;
+
+        if (this.xp >= 100 && this.getLevel() < 3){
+            this.xp -= 100;
+            this.levelUp();
+            return true;
+        }
+
+        return false;
 
     }
 
-    private void levelUp(){
+    protected abstract void levelUp();
 
-    }
+    public void equip(Equippable e, Inventory<Item> inv) throws InventoryFullException {
 
-    public String getJob(){
-        return "Hero";
-    }
-
-    public boolean equip(Equippable e){
-
-    }
-
-    public boolean addToInventory(Item i) throws InventoryFullException {
-
-    }
-
-    public Item removeFromInventory(Item i){
+        e.equip(this, inv);
 
     }
 
     public abstract void action(Battle b);
 
+    public Weapon getGear(Weapon e){
+        return this.weapon;
+    }
+
+    public Armor getGear(Armor e){
+        return this.armor;
+    }
+
+    public Amulet getGear(Amulet e){
+        return this.amulet;
+    }
+
+    public void setGear(Weapon e){
+        this.weapon = e;
+    }
+
+    public void setGear(Armor e){
+        this.armor = e;
+    }
+
+    public void setGear(Amulet e){
+        this.amulet = e;
+    }
 }

@@ -2,6 +2,7 @@ package game.entities.creatures;
 
 import game.entities.actions.Attack;
 import game.entities.actions.Evade;
+import game.entities.effects.Cowardly;
 import game.levels.Battle;
 
 public class Goblin extends Creature {

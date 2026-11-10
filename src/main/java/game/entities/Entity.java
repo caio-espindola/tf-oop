@@ -2,6 +2,7 @@ package game.entities;
 
 import java.util.ArrayList;
 
+import game.items.Equippable;
 import game.levels.Battle;
 import game.entities.actions.Action;
 import game.entities.effects.Effect;
@@ -34,6 +35,10 @@ public abstract class Entity implements Combatant {
 
     public boolean addEffect(Effect e){
 
+        if (e == null){
+            return true;
+        }
+
         boolean substitution = false;
 
         for (Effect elem : this.effects){
@@ -51,11 +56,35 @@ public abstract class Entity implements Combatant {
 
     }
 
+    public boolean removeEffect(Effect e){
+        if (e == null){
+            return true;
+        }
+
+        return effects.remove(e);
+    }
+
     public boolean takeDamage(int dmg){
+
+        if (current_hp - dmg <= 0){
+            current_hp = 0;
+            this.alive = false;
+            return true;
+        }
+
+        if (current_hp - dmg >= max_hp){
+            current_hp = max_hp;
+            return false;
+        }
+
+        current_hp -= dmg;
+        return false;
 
     }
 
     public void heal(int amount){
+
+        this.takeDamage(amount * -1);
 
     }
 

@@ -1,5 +1,8 @@
 package game.entities.effects;
 
+import game.entities.Entity;
+import game.levels.Battle;
+
 public class Thief extends Effect {
 
     public Thief(int duration){
@@ -7,6 +10,10 @@ public class Thief extends Effect {
         super(duration);
 
         this.name = "Thief";
+
+    }
+
+    public boolean apply(Battle b, Entity e){
 
     }
     
