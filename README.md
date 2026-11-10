@@ -1,7 +1,7 @@
 # tf-oop
 Trabalho Final da disciplina de Programação Orientada a Objetos
 
-TODO:
+TO DO:
 
  - tudo lmao
 
@@ -19,3 +19,66 @@ IDEIAS:
  - sistema de efeitos temporarios (damage-over-time, buffs, debuffs)
  - cada inimigo tem um efeito permanente
  - 
+
+INIMIGOS:
+
+ - Glitch Goblin:
+    HP: bem pouco
+    Mana: 0
+    Skills: Attack, Evade
+    Trait: Cowardly - Chance de escapar da luta com vida baixa, rendendo menos XP
+
+ - Syntax Skeleton:
+    HP: pouco
+    Mana: bem pouco?
+    Skills: Attack, Block
+    Trait: Undying - Revive uma vez depois de morrer
+
+ - RAM Rogue:
+    HP: medio
+    Mana: pouco
+    Skills: Attack, Evade, Feint
+    Trait: Thief - Chance de remover um dos items de um personagem no inicio da luta
+
+ - Data Dragon:
+    HP: alto
+    Mana: medio
+    Skills: Attack, Wind, Fire Breath
+    Trait: Fearsome - Personagens tem uma chance de perder a rodada
+
+ - Null Lich:
+    HP: Muito Alto
+    Mana: Muito Alto
+    Skills: Attack, Raise Dead, Steal Life, Ultimate: Power Word Kill
+    Trait: Necromancer - Não pode ser atacado enquanto existirem esqueletos vivos
+
+HEROIS:
+
+ - Warrior:
+    HP: alto
+    Mana: bem baixo
+    Skills: Attack, Block
+    Skill desbloqueavel: Parry
+    Ultimate:
+
+ - Archer:
+    HP: medio
+    Mana: baixo
+    Skills: Arrow, Evade
+    Skill desbloqueavel: Focus
+    Ultimate:
+
+ - Mage:
+    HP: baixo
+    Mana: alto
+    Skills: Magic Missile, Mage Shield
+    Skill desbloqueavel: Hex
+    Ultimate:
+
+ - Cleric:
+    HP: medio
+    Mana: medio
+    Skills: Smite, Heal
+    Skill desbloqueavel: Warding Zone
+    Ultimate:
+
