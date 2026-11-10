@@ -24,8 +24,7 @@ public interface Combatant {
 
     public boolean takeDamage(int dmg);
 
-    // action(): pass functional interface as parameter? or individual methods attack(), spell(), move() etc?
-    // specification says to pass instance of Battle, but it seems weird.
+    public void heal(int amount);
 
     public void action(Battle b);
 }

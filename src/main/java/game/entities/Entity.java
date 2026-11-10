@@ -1,19 +1,61 @@
 package game.entities;
 
+import java.util.ArrayList;
+
 import game.levels.Battle;
+import game.entities.actions.Action;
+import game.entities.effects.Effect;
 
 public abstract class Entity implements Combatant {
 
-    private String name;
+    protected String name;
     private int max_hp, current_hp, max_mana, current_mana, defense, level;
-    private boolean alive;
+    protected boolean alive;
     private Stats stats;
+    private Action[] skills;
+    private ArrayList<Effect> effects;
+
+    public Entity(int max_hp, int max_mana, int defense, int level){
+
+        this.setMaxHP(max_hp);
+        this.setCurrentHP(max_hp);
+        this.setMaxMana(max_mana);
+        this.setCurrentMana(max_mana);
+        this.setDefense(defense);
+        this.setLevel(level);
+
+        this.skills = new Action[4];
+        this.effects = new ArrayList<Effect>();
+    }
 
     public boolean isAlive(){
         return this.alive;
     }
 
+    public boolean addEffect(Effect e){
+
+        boolean substitution = false;
+
+        for (Effect elem : this.effects){
+            if (elem.equals(e)){
+                effects.set(effects.indexOf(elem), e);
+                substitution = true;
+            }
+        }
+
+        if (!substitution){
+            this.effects.add(e);
+        }
+
+        return substitution;
+
+    }
+
     public boolean takeDamage(int dmg){
+
+    }
+
+    public void heal(int amount){
 
     }
 
@@ -36,6 +78,18 @@ public abstract class Entity implements Combatant {
 
     public void setCurrentHP(int current_hp) {
         this.current_hp = current_hp;
+    }
+
+    public Action getSkill(int index){
+        return skills[index];
+    }
+
+    public Action[] getAllSkills(){
+        return this.skills;
+    }
+
+    public void setSkill(int index, Action skill){
+        this.skills[index] = skill;
     }
 
     public int getMaxMana() {
