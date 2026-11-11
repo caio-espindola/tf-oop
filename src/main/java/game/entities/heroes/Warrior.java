@@ -1,5 +1,7 @@
 package game.entities.heroes;
 
+import game.entities.Stats;
+import game.entities.actions.Action;
 import game.entities.actions.Attack;
 import game.entities.actions.Block;
 import game.entities.actions.BoogieWoogie;
@@ -7,6 +9,22 @@ import game.entities.actions.Parry;
 import game.levels.Battle;
 
 public class Warrior extends Hero {
+
+    protected int HP_INCREASE(){
+        return 100;
+    }
+
+    protected int MANA_INCREASE(){
+        return 10;
+    }
+
+    protected Action UNLOCKABLE(int i){
+        if (i == 0){
+            return new Parry();
+        } else {
+            return new BoogieWoogie();
+        }
+    }
 
     public boolean action(Battle b){
 
@@ -23,21 +41,12 @@ public class Warrior extends Hero {
         this.setSkill(2, null);
         this.setSkill(3, null);
 
-    }
+        Stats aux = this.getStats();
 
-    public void levelUp(){
-
-        this.setLevel(this.getLevel() + 1);
-
-        if (this.getLevel() == 2){
-
-            this.setSkill(2, new Parry());
-
-        } else if (this.getLevel() == 3){
-
-            this.setSkill(3, new BoogieWoogie());
-
-        }
+        aux.setSTR(120);
+        aux.setDEX(60);
+        aux.setINT(10);
+        aux.setPIE(10);
 
     }
 
