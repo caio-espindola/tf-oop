@@ -1,21 +1,15 @@
 package game.items;
 
+import game.entities.Stats;
+import game.entities.effects.Effect;
 import game.entities.heroes.Hero;
 import game.exceptions.InventoryFullException;
 
-public abstract class Amulet extends Item implements Equippable {
+public abstract class Amulet extends Gear {
 
-    public void equip(Hero h, Inventory<Item> inv) throws InventoryFullException {
+    public Amulet(String name, int value, Stats bonuses, int rarity, Effect trait){
 
-        Item aux = h.getGear(2);
-
-        if (aux == null){
-            h.setGear(2, this);
-            return;
-        }
-
-        inv.addToInventory(aux);
-        h.setGear(2, this);
+        super(name, value, bonuses, rarity, trait);
 
     }
 

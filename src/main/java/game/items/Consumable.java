@@ -4,6 +4,6 @@ import game.entities.Entity;
 
 public interface Consumable {
 
-    public void consume(Entity e);
+    public void consume(Entity e, Inventory<Item> inv);
 
 }
