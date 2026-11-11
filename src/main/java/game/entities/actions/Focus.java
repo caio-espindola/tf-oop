@@ -1,10 +1,11 @@
 package game.entities.actions;
 
+import game.entities.Entity;
 import game.levels.Battle;
 
 public class Focus implements Action {
 
-    public boolean act(Battle b){
+    public boolean act(Battle b, Entity user, Entity target){
         
     }
     

@@ -1,8 +1,11 @@
 package game.entities.actions;
-public class Feint implements Action {
-    
-    public boolean act(Battle b){
-        
-    }
 
+import game.entities.Entity;
+import game.levels.Battle;
+
+public class Feint implements Action {
+
+    public boolean act(Battle b, Entity user, Entity target) {
+        return false;
+    }
 }
