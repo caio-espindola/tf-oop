@@ -27,6 +27,7 @@ public abstract class Entity implements Combatant {
 
         this.skills = new Action[4];
         this.effects = new ArrayList<Effect>();
+        this.stats = new Stats();
     }
 
     public boolean isAlive(){

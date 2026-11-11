@@ -11,6 +11,17 @@ public class Stats {
         PIE
     }
 
+    public Stats(){
+        this.str = this.dex = this.intl = this.pie = 0;
+    }
+
+    public Stats(int str, int dex, int intl, int pie){
+        this.str = str;
+        this.dex = dex;
+        this.intl = intl;
+        this.pie = pie;
+    }
+
     public int getSTR(){
         return this.str;
     }

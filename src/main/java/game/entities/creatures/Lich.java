@@ -1,5 +1,6 @@
 package game.entities.creatures;
 
+import game.entities.Stats;
 import game.entities.actions.Attack;
 import game.entities.actions.FurubeYuraYura;
 import game.entities.actions.RaiseDead;
@@ -25,6 +26,13 @@ public class Lich extends Creature {
         this.setSkill(3, new );
 
         this.addEffect(new Necromancer(-1));
+
+        Stats aux = this.getStats();
+
+        aux.setSTR(150);
+        aux.setDEX(100);
+        aux.setINT(200);
+        aux.setPIE(50);
 
     }
 

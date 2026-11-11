@@ -1,5 +1,6 @@
 package game.entities.creatures;
 
+import game.entities.Stats;
 import game.entities.actions.Attack;
 import game.entities.actions.FireBreath;
 import game.entities.actions.Wind;
@@ -25,6 +26,12 @@ public class Dragon extends Creature {
 
         this.addEffect(new Fearsome(-1));
 
+        Stats aux = this.getStats();
+
+        aux.setSTR(50 * level);
+        aux.setDEX(20 * level);
+        aux.setINT(30 * level);
+        aux.setPIE(10 * level);
     }
 
 }

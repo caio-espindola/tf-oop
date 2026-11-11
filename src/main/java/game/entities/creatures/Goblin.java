@@ -1,5 +1,6 @@
 package game.entities.creatures;
 
+import game.entities.Stats;
 import game.entities.actions.Attack;
 import game.entities.actions.Evade;
 import game.entities.effects.Cowardly;
@@ -23,6 +24,13 @@ public class Goblin extends Creature {
         this.setSkill(3, null);
 
         this.addEffect(new Cowardly(-1));
+
+        Stats aux = this.getStats();
+
+        aux.setSTR(20 * level);
+        aux.setDEX(30 * level);
+        aux.setINT(10 * level);
+        aux.setPIE(0);
 
     }
 

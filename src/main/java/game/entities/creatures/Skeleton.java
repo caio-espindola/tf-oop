@@ -1,5 +1,6 @@
 package game.entities.creatures;
 
+import game.entities.Stats;
 import game.entities.actions.Attack;
 import game.entities.actions.Block;
 import game.entities.effects.Undying;
@@ -24,6 +25,12 @@ public class Skeleton extends Creature {
 
         this.addEffect(new Undying(-1));
 
+        Stats aux = this.getStats();
+
+        aux.setSTR(30 * level);
+        aux.setDEX(30 * level);
+        aux.setINT(10 * level);
+        aux.setPIE(0);
     }
 
 }
