@@ -14,12 +14,24 @@ public class Cleric extends Hero {
         return 50;
     }
 
-    protected Action UNLOCKABLE(int i){
-        if (i == 0){
-            return new WardingZone();
-        } else {
-            return new FurubeYuraYura();
+    protected Action SKILLS(int i){
+
+        switch (i) {
+            case 0:
+                return new Smite();
+            case 1:
+                return new Heal();
+            case 2:
+                return new WardingZone();
+            case 3:
+                return new FurubeYuraYura();
+            default:
+                return null;
         }
+    }
+
+    protected Stats STARTING_STATS(){
+        return new Stats(40, 40, 20, 100);
     }
 
     public boolean action(Battle b){
@@ -31,18 +43,6 @@ public class Cleric extends Hero {
         super(max_hp, max_mana, defense, level);
 
         this.name = "Cleric";
-
-        this.setSkill(0, new Smite());
-        this.setSkill(1, new Heal());
-        this.setSkill(2, null);
-        this.setSkill(3, null);
-
-        Stats aux = this.getStats();
-
-        aux.setSTR(40);
-        aux.setDEX(40);
-        aux.setINT(20);
-        aux.setPIE(100);
 
     }
 }

@@ -16,6 +16,8 @@ public abstract class Entity implements Combatant {
     private Action[] skills;
     private ArrayList<Effect> effects;
 
+    protected abstract Action SKILLS(int i);
+
     public Entity(int max_hp, int max_mana, int defense, int level){
 
         this.setMaxHP(max_hp);
@@ -150,6 +152,10 @@ public abstract class Entity implements Combatant {
     @Override
     public Stats getStats() {
         return stats;
+    }
+
+    public void setStats(Stats s){
+        this.stats = s;
     }
 
     public int getDefense() {

@@ -1,14 +1,30 @@
 package game.entities.creatures;
 
 import game.entities.Stats;
-import game.entities.actions.Attack;
-import game.entities.actions.FurubeYuraYura;
-import game.entities.actions.RaiseDead;
-import game.entities.actions.StealLife;
+import game.entities.actions.*;
 import game.entities.effects.Necromancer;
 import game.levels.Battle;
 
 public class Lich extends Creature {
+
+    protected Stats STARTING_STATS(int l){
+        return new Stats(150, 100, 200, 50);
+    }
+
+    protected Action SKILLS(int i){
+        switch (i){
+            case 0:
+                return new Attack();
+            case 1:
+                return new RaiseDead();
+            case 2:
+                return new StealLife();
+            case 3:
+                return new ;
+            default:
+                return null;
+        }
+    }
 
     public boolean action(Battle b){
 
@@ -20,19 +36,7 @@ public class Lich extends Creature {
 
         this.name = "Null Lich";
 
-        this.setSkill(0, new Attack());
-        this.setSkill(1, new RaiseDead());
-        this.setSkill(2, new StealLife());
-        this.setSkill(3, new );
-
         this.addEffect(new Necromancer(-1));
-
-        Stats aux = this.getStats();
-
-        aux.setSTR(150);
-        aux.setDEX(100);
-        aux.setINT(200);
-        aux.setPIE(50);
 
     }
 

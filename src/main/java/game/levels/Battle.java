@@ -21,6 +21,10 @@ public class Battle {
         RIGHT_FRONT_TOP,
         RIGHT_FRONT_BOTTOM;
 
+        public boolean sameSide(Position p){
+            return (this.onLeft() && p.onLeft()) || (this.onRight() && p.onRight());
+        }
+
         public static Position atIndex(int i){
             return values()[i];
         }
@@ -109,7 +113,7 @@ public class Battle {
             return this.add(e, p);
         } else if (e instanceof Creature){
             return this.add(e, p);
-        } else {
+        } else { // add case for placeholder entity
             return false;
         }
 

@@ -18,12 +18,24 @@ public class Warrior extends Hero {
         return 10;
     }
 
-    protected Action UNLOCKABLE(int i){
-        if (i == 0){
-            return new Parry();
-        } else {
-            return new BoogieWoogie();
+    protected Action SKILLS(int i){
+
+        switch (i) {
+            case 0:
+                return new Attack();
+            case 1:
+                return new Block();
+            case 2:
+                return new Parry();
+            case 3:
+                return new BoogieWoogie();
+            default:
+                return null;
         }
+    }
+
+    protected Stats STARTING_STATS(){
+         return new Stats(120, 60, 10, 10);
     }
 
     public boolean action(Battle b){
@@ -35,18 +47,6 @@ public class Warrior extends Hero {
         super(max_hp, max_mana, defense, level);
 
         this.name = "Warrior";
-
-        this.setSkill(0, new Attack());
-        this.setSkill(1, new Block());
-        this.setSkill(2, null);
-        this.setSkill(3, null);
-
-        Stats aux = this.getStats();
-
-        aux.setSTR(120);
-        aux.setDEX(60);
-        aux.setINT(10);
-        aux.setPIE(10);
 
     }
 

@@ -11,7 +11,11 @@ public class Attack implements Action {
         Battle.Position t_pos = b.find(target);
         boolean target_on_front = t_pos.onFront();
         boolean target_on_top = t_pos.onTop();
+        boolean on_same_side = b.find(user).sameSide(b.find(target));
 
+        if (on_same_side){
+            return false;
+        }
 
         if (!(user_on_front && target_on_front)){
             return false;

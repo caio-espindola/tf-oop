@@ -3,8 +3,6 @@ package game.entities.heroes;
 import game.entities.Entity;
 import game.entities.Stats;
 import game.entities.actions.Action;
-import game.entities.actions.BoogieWoogie;
-import game.entities.actions.Parry;
 import game.exceptions.InventoryFullException;
 import game.items.*;
 import game.levels.Battle;
@@ -18,11 +16,18 @@ public abstract class Hero extends Entity {
     private final int MAX_LEVEL = 3;
     protected abstract int HP_INCREASE();
     protected abstract int MANA_INCREASE();
-    protected abstract Action UNLOCKABLE(int i);
+    protected abstract Stats STARTING_STATS();
 
     public Hero(int max_hp, int max_mana, int defense, int level){
 
         super(max_hp, max_mana, defense, level);
+
+        this.setSkill(0, SKILLS(0));
+        this.setSkill(1, SKILLS(1));
+        this.setSkill(2, null);
+        this.setSkill(3, null);
+
+        this.setStats(STARTING_STATS());
 
         this.alive = true;
 
@@ -60,11 +65,11 @@ public abstract class Hero extends Entity {
 
         if (this.getLevel() == 2){
 
-            this.setSkill(2, UNLOCKABLE(0));
+            this.setSkill(2, SKILLS(2));
 
         } else if (this.getLevel() == 3){
 
-            this.setSkill(3, UNLOCKABLE(1));
+            this.setSkill(3, SKILLS(3));
 
         }
 
@@ -82,10 +87,40 @@ public abstract class Hero extends Entity {
 
     }
 
-    public void equip(Equippable e, Inventory<Item> inv) throws InventoryFullException {
+    public void equip(Gear e, Inventory<Item> inv) throws InventoryFullException {
 
-        e.equip(this, inv);
+        Gear aux = this.getGear(e);
 
+        if (aux == null){
+            this.setGear(e);
+        } else {
+            inv.addToInventory(this.unequip(aux));
+            this.setGear(e);
+        }
+
+        Stats h_stats = this.getStats();
+
+        h_stats.setSTR(h_stats.getSTR() + e.getBonuses().getSTR());
+        h_stats.setDEX(h_stats.getDEX() + e.getBonuses().getDEX());
+        h_stats.setINT(h_stats.getINT() + e.getBonuses().getINT());
+        h_stats.setPIE(h_stats.getPIE() + e.getBonuses().getPIE());
+
+        this.addEffect(e.getTrait());
+
+    }
+
+    private Gear unequip(Gear g){
+
+        Stats h_stats = this.getStats();
+
+        h_stats.setSTR(h_stats.getSTR() - g.getBonuses().getSTR());
+        h_stats.setDEX(h_stats.getDEX() - g.getBonuses().getDEX());
+        h_stats.setINT(h_stats.getINT() - g.getBonuses().getINT());
+        h_stats.setPIE(h_stats.getPIE() - g.getBonuses().getPIE());
+
+        this.removeEffect(g.getTrait());
+
+        return this.getGear(g);
     }
 
     public abstract void action(Battle b);

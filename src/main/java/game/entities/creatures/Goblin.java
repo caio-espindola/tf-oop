@@ -1,12 +1,28 @@
 package game.entities.creatures;
 
 import game.entities.Stats;
+import game.entities.actions.Action;
 import game.entities.actions.Attack;
 import game.entities.actions.Evade;
 import game.entities.effects.Cowardly;
 import game.levels.Battle;
 
 public class Goblin extends Creature {
+
+    protected Stats STARTING_STATS(int l){
+        return new Stats(20*l, 30*l, 10*l, 0);
+    }
+
+    protected Action SKILLS(int i){
+        switch (i){
+            case 0:
+                return new Attack();
+            case 1:
+                return new Evade();
+            default:
+                return null;
+        }
+    }
 
     public boolean action(Battle b){
 
@@ -18,19 +34,7 @@ public class Goblin extends Creature {
 
         this.name = "Glitch Goblin";
 
-        this.setSkill(0, new Attack());
-        this.setSkill(1, new Evade());
-        this.setSkill(2, null);
-        this.setSkill(3, null);
-
         this.addEffect(new Cowardly(-1));
-
-        Stats aux = this.getStats();
-
-        aux.setSTR(20 * level);
-        aux.setDEX(30 * level);
-        aux.setINT(10 * level);
-        aux.setPIE(0);
 
     }
 

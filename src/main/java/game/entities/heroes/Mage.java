@@ -14,12 +14,24 @@ public class Mage extends Hero {
         return 70;
     }
 
-    protected Action UNLOCKABLE(int i){
-        if (i == 0){
-            return new Hex();
-        } else {
-            return new Murasaki();
+    protected Action SKILLS(int i){
+
+        switch (i) {
+            case 0:
+                return new MagicMissile();
+            case 1:
+                return new MageShield();
+            case 2:
+                return new Hex();
+            case 3:
+                return new Murasaki();
+            default:
+                return null;
         }
+    }
+
+    protected Stats STARTING_STATS(){
+        return new Stats(20, 50, 120 ,10);
     }
 
     public boolean action(Battle b){
@@ -31,18 +43,6 @@ public class Mage extends Hero {
         super(max_hp, max_mana, defense, level);
 
         this.name = "Mage";
-
-        this.setSkill(0, new MagicMissile());
-        this.setSkill(1, new MageShield());
-        this.setSkill(2, null);
-        this.setSkill(3, null);
-
-        Stats aux = this.getStats();
-
-        aux.setSTR(20);
-        aux.setDEX(50);
-        aux.setINT(120);
-        aux.setPIE(10);
 
     }
 }

@@ -1,13 +1,28 @@
 package game.entities.creatures;
 
 import game.entities.Stats;
-import game.entities.actions.Attack;
-import game.entities.actions.FireBreath;
-import game.entities.actions.Wind;
+import game.entities.actions.*;
 import game.entities.effects.Fearsome;
 import game.levels.Battle;
 
 public class Dragon extends Creature {
+
+    protected Stats STARTING_STATS(int l){
+        return new Stats(50*l, 20*l, 30*l, 10*l);
+    }
+
+    protected Action SKILLS(int i){
+        switch (i){
+            case 0:
+                return new Attack();
+            case 1:
+                return new Wind();
+            case 2:
+                return new FireBreath();
+            default:
+                return null;
+        }
+    }
 
     public boolean action(Battle b){
 
@@ -19,19 +34,8 @@ public class Dragon extends Creature {
 
         this.name = "Data Dragon";
 
-        this.setSkill(0, new Attack());
-        this.setSkill(1, new Wind());
-        this.setSkill(2, new FireBreath());
-        this.setSkill(3, null);
-
         this.addEffect(new Fearsome(-1));
 
-        Stats aux = this.getStats();
-
-        aux.setSTR(50 * level);
-        aux.setDEX(20 * level);
-        aux.setINT(30 * level);
-        aux.setPIE(10 * level);
     }
 
 }

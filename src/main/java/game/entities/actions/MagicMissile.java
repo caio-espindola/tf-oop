@@ -6,6 +6,27 @@ import game.levels.Battle;
 public class MagicMissile implements Action{
 
     public boolean act(Battle b, Entity user, Entity target) {
-        return false;
+
+        boolean on_same_side = b.find(user).sameSide(b.find(target));
+
+        if (on_same_side){
+            return false;
+        }
+
+        int user_int = user.getStats().getINT();
+        int target_int = target.getStats().getINT();
+        int target_def = target.getDefense();
+
+        double r = 1 + ((Math.random())-0.5)/2; // generates a random double in [0.75 , 1.25[
+
+        double atk = user_int * r;
+        double ac = target_def + target_int;
+
+        int dmg = (int) Math.ceil(atk / Math.pow(ac, 1/3.0));
+
+        target.takeDamage(dmg);
+
+        return true;
+
     }
 }

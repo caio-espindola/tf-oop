@@ -1,12 +1,29 @@
 package game.entities.creatures;
 
 import game.entities.Stats;
+import game.entities.actions.Action;
 import game.entities.actions.Attack;
 import game.entities.actions.Block;
+import game.entities.actions.Evade;
 import game.entities.effects.Undying;
 import game.levels.Battle;
 
 public class Skeleton extends Creature {
+
+    protected Stats STARTING_STATS(int l){
+        return new Stats(30*l, 30*l, 10*l, 0);
+    }
+
+    protected Action SKILLS(int i){
+        switch (i){
+            case 0:
+                return new Attack();
+            case 1:
+                return new Block();
+            default:
+                return null;
+        }
+    }
 
     public boolean action(Battle b){
 
@@ -18,19 +35,8 @@ public class Skeleton extends Creature {
 
         this.name = "Syntax Skeleton";
 
-        this.setSkill(0, new Attack());
-        this.setSkill(1, new Block());
-        this.setSkill(2, null);
-        this.setSkill(3, null);
-
         this.addEffect(new Undying(-1));
 
-        Stats aux = this.getStats();
-
-        aux.setSTR(30 * level);
-        aux.setDEX(30 * level);
-        aux.setINT(10 * level);
-        aux.setPIE(0);
     }
 
 }
