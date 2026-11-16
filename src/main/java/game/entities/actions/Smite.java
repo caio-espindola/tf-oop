@@ -5,6 +5,9 @@ import game.levels.Battle;
 
 public class Smite implements Action {
 
+    public final int cost = 10;
+    public static String name = "Smite";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
@@ -12,6 +15,10 @@ public class Smite implements Action {
         boolean target_on_back = b.find(target).onBack();
 
         if (on_same_side || user_on_back){
+            return false;
+        }
+
+        if (user.getCurrentMana() < this.cost){
             return false;
         }
 
@@ -32,6 +39,7 @@ public class Smite implements Action {
 
         target.takeDamage(dmg);
 
+        user.setCurrentMana(user.getCurrentMana() - this.cost);
         return true;
 
     }

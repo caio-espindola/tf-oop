@@ -5,6 +5,8 @@ import game.levels.Battle;
 
 public class Arrow implements Action{
 
+    public static String name = "Arrow";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));

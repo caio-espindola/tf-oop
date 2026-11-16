@@ -5,6 +5,8 @@ import game.levels.Battle;
 
 public class Move implements Action {
 
+    public static String name = "Move";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         Battle.Position t_pos = b.find(target);

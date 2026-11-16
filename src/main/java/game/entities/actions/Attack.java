@@ -5,6 +5,8 @@ import game.levels.Battle;
 
 public class Attack implements Action {
 
+    public static String name = "Attack";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         boolean user_on_front = b.find(user).onFront();

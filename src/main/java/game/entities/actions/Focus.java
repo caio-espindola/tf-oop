@@ -5,11 +5,18 @@ import game.levels.Battle;
 
 public class Focus implements Action {
 
+    public final int cost = 10;
+    public static String name = "Focus";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
+            return false;
+        }
+
+        if (user.getCurrentMana() < this.cost){
             return false;
         }
 
@@ -25,6 +32,7 @@ public class Focus implements Action {
 
         target.takeDamage(dmg);
 
+        user.setCurrentMana(user.getCurrentMana() - this.cost);
         return true;
     }
     

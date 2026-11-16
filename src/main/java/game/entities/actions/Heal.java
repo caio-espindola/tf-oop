@@ -5,11 +5,18 @@ import game.levels.Battle;
 
 public class Heal implements Action {
 
+    public final int cost = 15;
+    public static String name = "Heal";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (!on_same_side){
+            return false;
+        }
+
+        if (user.getCurrentMana() < this.cost){
             return false;
         }
 
@@ -20,6 +27,7 @@ public class Heal implements Action {
 
         target.takeDamage(-1 * heal_amount);
 
+        user.setCurrentMana(user.getCurrentMana() - this.cost);
         return true;
     }
     

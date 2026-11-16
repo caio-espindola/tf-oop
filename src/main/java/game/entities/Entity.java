@@ -67,6 +67,16 @@ public abstract class Entity implements Combatant {
         return effects.remove(e);
     }
 
+    public boolean hasEffect(Effect e){
+        for (Effect elem : this.effects){
+            if (elem.equals(e)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean takeDamage(int dmg){
 
         if (current_hp - dmg <= 0){
@@ -101,7 +111,15 @@ public abstract class Entity implements Combatant {
     }
 
     public void setMaxHP(int max_hp) {
+        if (max_hp <= 0){
+            max_hp = 1;
+        }
+
         this.max_hp = max_hp;
+
+        if (current_hp > max_hp){
+            current_hp = max_hp;
+        }
     }
 
     public int getCurrentHP() {
@@ -109,7 +127,15 @@ public abstract class Entity implements Combatant {
     }
 
     public void setCurrentHP(int current_hp) {
+        if (current_hp <= 0){
+            current_hp = 1;
+        }
+
         this.current_hp = current_hp;
+
+        if (current_hp > max_hp){
+            current_hp = max_hp;
+        }
     }
 
     public Action getSkill(int index){
@@ -129,7 +155,16 @@ public abstract class Entity implements Combatant {
     }
 
     public void setMaxMana(int max_mana) {
+
+        if (max_mana < 0){
+            max_mana = 0;
+        }
+
         this.max_mana = max_mana;
+
+        if (current_mana > max_mana){
+            current_mana = max_mana;
+        }
     }
 
     public int getCurrentMana() {
@@ -137,7 +172,16 @@ public abstract class Entity implements Combatant {
     }
 
     public void setCurrentMana(int current_mana) {
+
+        if (current_mana < 0){
+            current_mana = 0;
+        }
+
         this.current_mana = current_mana;
+
+        if (current_mana > max_mana){
+            current_mana = max_mana;
+        }
     }
 
     @Override

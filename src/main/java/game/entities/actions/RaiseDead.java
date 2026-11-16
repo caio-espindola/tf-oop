@@ -7,9 +7,16 @@ import game.levels.Battle;
 
 public class RaiseDead implements Action {
 
+    public final int cost = 30;
+    public static String name = "Raise Dead";
+
     public boolean act(Battle b, Entity user, Entity target) {
 
         if (!(target instanceof PlaceHolder)){
+            return false;
+        }
+
+        if (user.getCurrentMana() < this.cost){
             return false;
         }
 
@@ -19,11 +26,12 @@ public class RaiseDead implements Action {
 
         r -= 0.25;
 
-        int hp = (int) Math.floor(user_int-user_pie * r / 2);
+        int hp = (int) Math.floor(user_int - user_pie * r / 2);
 
         Battle.Position p = b.find(target);
         Skeleton s = new Skeleton(hp, 0, 0, 2);
 
+        user.setCurrentMana(user.getCurrentMana() - this.cost);
         return b.add(s, p);
 
     }

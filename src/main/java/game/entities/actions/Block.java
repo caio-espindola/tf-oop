@@ -6,6 +6,8 @@ import game.levels.Battle;
 
 public class Block implements Action {
 
+    public static String name = "Block";
+
     public boolean act(Battle b, Entity user, Entity target){
 
         if (user != target){

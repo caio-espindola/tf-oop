@@ -6,6 +6,8 @@ import game.levels.Battle;
 
 public class Evade implements Action{
 
+    public static String name = "Evade";
+
     public boolean act(Battle b, Entity user, Entity target) {
 
         if (user != target){

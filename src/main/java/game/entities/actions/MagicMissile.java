@@ -5,11 +5,18 @@ import game.levels.Battle;
 
 public class MagicMissile implements Action{
 
+    public final int cost = 10;
+    public static String name = "Magic Missile";
+
     public boolean act(Battle b, Entity user, Entity target) {
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
+            return false;
+        }
+
+        if (user.getCurrentMana() < this.cost){
             return false;
         }
 
@@ -26,6 +33,7 @@ public class MagicMissile implements Action{
 
         target.takeDamage(dmg);
 
+        user.setCurrentMana(user.getCurrentMana() - this.cost);
         return true;
 
     }

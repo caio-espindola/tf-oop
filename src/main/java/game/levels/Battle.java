@@ -77,6 +77,14 @@ public class Battle {
 
     }
 
+    public Entity[] getHeroes(){
+        return this.heroes;
+    }
+
+    public Entity[] getEnemies(){
+        return this.enemies;
+    }
+
     public Entity getFromPosition(Position p){
         if (p.onLeft()){
 
