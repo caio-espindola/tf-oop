@@ -13,8 +13,25 @@ public class Undying extends Effect {
 
     }
 
+    @Override
+    public boolean set(Battle b, Entity e) {
+        return true;
+    }
+
     public boolean apply(Battle b, Entity e){
+        double hp_percent = (double) e.getCurrentHP() / e.getMaxHP();
+
+        if (hp_percent < 0.2){
+            e.setCurrentHP(e.getMaxHP());
+            return e.removeEffect(this);
+        }
+
+        return true;
+    }
+
+    @Override
+    public void unset(Battle b, Entity e) {
 
     }
-    
+
 }

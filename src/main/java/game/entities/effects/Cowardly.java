@@ -13,8 +13,26 @@ public class Cowardly extends Effect {
 
     }
 
+    @Override
+    public boolean set(Battle b, Entity e) {
+        return true;
+    }
+
     public boolean apply(Battle b, Entity e){
+        double hp_percent = (double) e.getCurrentHP() / e.getMaxHP();
+
+        boolean escape = Math.random() > hp_percent;
+
+        if (escape){
+            return b.kill(e);
+        }
+
+        return true;
+    }
+
+    @Override
+    public void unset(Battle b, Entity e) {
 
     }
-    
+
 }

@@ -12,7 +12,17 @@ public class Evading extends Effect {
     }
 
     @Override
+    public boolean set(Battle b, Entity e) {
+        return true;
+    }
+
+    @Override
     public boolean apply(Battle b, Entity e) {
+        return true;
+    }
+
+    @Override
+    public void unset(Battle b, Entity e) {
 
     }
 }

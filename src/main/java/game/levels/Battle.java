@@ -1,6 +1,7 @@
 package game.levels;
 
 import game.entities.Entity;
+import game.entities.PlaceHolder;
 import game.entities.creatures.Creature;
 import game.entities.heroes.Hero;
 
@@ -115,13 +116,48 @@ public class Battle {
 
     }
 
+    public boolean kill(Entity e){
+
+        Position p = find(e);
+
+        if (p == null || e instanceof PlaceHolder){
+            return false;
+        }
+
+        int i = p.ordinal();
+
+        if (i < 4){
+            heroes[i] = new PlaceHolder();
+        } else {
+            enemies[i-4] = new PlaceHolder();
+        }
+
+        e.kill();
+        e.clearEffects();
+        return true;
+    }
+
     public boolean add(Entity e, Position p){
 
         if (e instanceof Hero){
             return this.add(e, p);
         } else if (e instanceof Creature){
             return this.add(e, p);
-        } else { // add case for placeholder entity
+        } else if (e instanceof PlaceHolder){
+            
+            if (p.ordinal() < 4){
+                this.heroes[p.ordinal()] = e;
+                this.count++;
+            } else if (p.ordinal() >= 4 && p.ordinal() < 9){
+                this.enemies[p.ordinal()] = e;
+                this.count++;
+            } else {
+                return false;
+            }
+
+            return true;
+
+        } else {
             return false;
         }
 
@@ -133,7 +169,7 @@ public class Battle {
             return false;
         }
 
-        if (getFromPosition(p) != null){
+        if (! (getFromPosition(p) instanceof PlaceHolder)){
             return false;
         }
 
@@ -149,7 +185,7 @@ public class Battle {
             return false;
         }
 
-        if (getFromPosition(p) != null){
+        if (! (getFromPosition(p) instanceof PlaceHolder)){
             return false;
         }
 
@@ -254,24 +290,49 @@ public class Battle {
             passTurn();
         }
 
-        Entity current = getFromPosition(Position.atIndex(active_pos));
-
-        if ((current == null) || !(current.isAlive())){
-            passActive();
-        }
-
         checkVictory();
 
+        Entity current = getFromPosition(Position.atIndex(active_pos));
+
+        if ((current instanceof PlaceHolder) || !(current.isAlive())){
+            passActive();
+            return;
+        }
+
+        current.passEffects();
         current.action(this);
 
     }
 
     public void start(){
 
+        for (int i = 0; i < 4; i++){
+            if (heroes[i] == null){
+                heroes[i] = new PlaceHolder();
+                this.add(heroes[i], Position.atIndex(i));
+            }
+        }
+
+        for (int i = 0; i < 5; i++){
+            if (enemies[i] == null){
+                enemies[i] = new PlaceHolder();
+                this.add(enemies[i], Position.atIndex(i + 4));
+            }
+        }
+
+        //...
+
     }
 
     public void end(boolean victory){
 
+        // calculate xp, gold, etc
+
+        for (Entity e : heroes){
+            e.revive();
+        }
+
+        // revive cleric in case of mahoraga summon
     }
 
 }

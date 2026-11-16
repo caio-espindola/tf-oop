@@ -14,7 +14,23 @@ public class Blocking extends Effect {
     }
 
     @Override
-    public boolean apply(Battle b, Entity e) {
+    public boolean set(Battle b, Entity e) {
+        int e_str = e.getStats().getSTR();
 
+        e.setDefense(e.getDefense() + e_str);
+
+        return true;
+    }
+
+    @Override
+    public boolean apply(Battle b, Entity e) {
+        return true;
+    }
+
+    @Override
+    public void unset(Battle b, Entity e) {
+        int e_str = e.getStats().getSTR();
+
+        e.setDefense(e.getDefense() - e_str);
     }
 }

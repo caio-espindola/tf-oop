@@ -3,7 +3,7 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class MagicMissile implements Action{
+public class MagicMissile extends DirectAction {
 
     public final int cost = 10;
     public static String name = "Magic Missile";
@@ -30,6 +30,16 @@ public class MagicMissile implements Action{
         double ac = target_def + target_int;
 
         int dmg = (int) Math.ceil(atk / Math.pow(ac, 1/3.0));
+
+        if (checkEvasion(target)){
+
+            return false;
+
+        } else if (checkParry(target)){
+
+            return false;
+
+        }
 
         target.takeDamage(dmg);
 

@@ -13,7 +13,9 @@ public abstract class Effect implements Applicable{
         this.name = "Effect";
     }
 
+    public abstract boolean set(Battle b, Entity e);
     public abstract boolean apply(Battle b, Entity e);
+    public abstract void unset(Battle b, Entity e);
 
     public boolean passDuration(){
 

@@ -3,7 +3,7 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class Smite implements Action {
+public class Smite extends DirectAction {
 
     public final int cost = 10;
     public static String name = "Smite";
@@ -36,6 +36,12 @@ public class Smite implements Action {
         double ac = target_def + target_pie;
 
         int dmg = (int) Math.ceil(atk / Math.pow(ac, 1/3.0));
+
+        if (checkEvasion(target)){
+
+            return false;
+
+        }
 
         target.takeDamage(dmg);
 

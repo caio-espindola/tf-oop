@@ -3,7 +3,7 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class Arrow implements Action{
+public class Arrow extends DirectAction {
 
     public static String name = "Arrow";
 
@@ -25,6 +25,20 @@ public class Arrow implements Action{
         double ac = target_def + target_dex;
 
         int dmg = (int) Math.ceil(atk / Math.pow(ac, 1/3.0));
+
+        if (checkEvasion(target)){
+
+            return false;
+
+        } else if (checkParry(target)){
+
+            double ratio = Math.min(target.getStats().getSTR() / user_dex, 1);
+
+            dmg = (int) Math.floor(dmg * (ratio));
+            user.takeDamage(dmg);
+            return false;
+
+        }
 
         target.takeDamage(dmg);
 

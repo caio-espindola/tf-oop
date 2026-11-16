@@ -4,7 +4,7 @@ import game.entities.Entity;
 import game.entities.effects.Blocking;
 import game.levels.Battle;
 
-public class Block implements Action {
+public class Block extends EffectAction {
 
     public static String name = "Block";
 

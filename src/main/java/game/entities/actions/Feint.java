@@ -2,10 +2,9 @@ package game.entities.actions;
 
 import game.entities.Entity;
 import game.entities.effects.Evading;
-import game.entities.effects.Feinting;
 import game.levels.Battle;
 
-public class Feint implements Action {
+public class Feint extends EffectAction {
 
     public static String name = "Feint";
 
@@ -15,7 +14,7 @@ public class Feint implements Action {
             return false;
         }
 
-        return user.addEffect(new Feinting(2));
+        return user.addEffect(new Evading(user.getLevel()));
 
     }
 }

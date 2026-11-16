@@ -4,7 +4,7 @@ import game.entities.Entity;
 import game.entities.effects.Shielded;
 import game.levels.Battle;
 
-public class MageShield implements Action {
+public class MageShield extends EffectAction {
 
     public final int cost = 15;
     public static String name = "Mage Shield";

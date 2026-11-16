@@ -14,7 +14,18 @@ public class Shielded extends Effect {
         this.name = "Shielded";
     }
 
-    public boolean apply(Battle b, Entity e){
+    @Override
+    public boolean set(Battle b, Entity e) {
+        e.setDefense(e.getDefense() + this.pwr);
+        return true;
+    }
 
+    public boolean apply(Battle b, Entity e){
+        return true;
+    }
+
+    @Override
+    public void unset(Battle b, Entity e) {
+        e.setDefense(e.getDefense() - this.pwr);
     }
 }

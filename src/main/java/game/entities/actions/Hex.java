@@ -4,7 +4,7 @@ import game.entities.Entity;
 import game.entities.effects.Hexed;
 import game.levels.Battle;
 
-public class Hex implements Action {
+public class Hex extends EffectAction {
 
     public final int cost = 30;
     public static String name = "Hex";

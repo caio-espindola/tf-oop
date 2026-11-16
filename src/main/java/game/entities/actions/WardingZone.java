@@ -5,7 +5,7 @@ import game.entities.PlaceHolder;
 import game.entities.effects.Shielded;
 import game.levels.Battle;
 
-public class WardingZone implements Action {
+public class WardingZone extends EffectAction {
 
     public final int cost = 50;
     public static String name = "Warding Zone";

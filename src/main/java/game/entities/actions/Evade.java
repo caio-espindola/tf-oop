@@ -4,7 +4,7 @@ import game.entities.Entity;
 import game.entities.effects.Evading;
 import game.levels.Battle;
 
-public class Evade implements Action{
+public class Evade extends EffectAction {
 
     public static String name = "Evade";
 

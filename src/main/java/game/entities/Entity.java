@@ -2,7 +2,6 @@ package game.entities;
 
 import java.util.ArrayList;
 
-import game.items.Equippable;
 import game.levels.Battle;
 import game.entities.actions.Action;
 import game.entities.effects.Effect;
@@ -32,8 +31,34 @@ public abstract class Entity implements Combatant {
         this.stats = new Stats();
     }
 
+    public void kill(){
+        this.alive = false;
+    }
+
+    public void revive(){
+        this.alive = true;
+        this.clearEffects();
+        this.setCurrentHP(max_hp);
+        this.setCurrentMana(max_mana);
+    }
+
     public boolean isAlive(){
         return this.alive;
+    }
+
+    public void passEffects(){
+
+        for (Effect e : this.effects){
+            if (e.passDuration()){
+                this.removeEffect(e);
+            }
+        }
+    }
+
+    public void clearEffects(){
+        for (Effect e : this.effects){
+            this.removeEffect(e);
+        }
     }
 
     public boolean addEffect(Effect e){
@@ -55,6 +80,7 @@ public abstract class Entity implements Combatant {
             this.effects.add(e);
         }
 
+        e.set(null, this);
         return substitution;
 
     }
@@ -64,6 +90,7 @@ public abstract class Entity implements Combatant {
             return true;
         }
 
+        e.unset(null, this);
         return effects.remove(e);
     }
 

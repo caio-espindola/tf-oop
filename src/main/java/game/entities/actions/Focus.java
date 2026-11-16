@@ -3,7 +3,7 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class Focus implements Action {
+public class Focus extends DirectAction {
 
     public final int cost = 10;
     public static String name = "Focus";
@@ -29,6 +29,12 @@ public class Focus implements Action {
         double ac = target_dex;
 
         int dmg = (int) Math.ceil(atk / Math.pow(ac, 1/3.0));
+
+        if (checkParry(target)){
+
+            return false;
+
+        }
 
         target.takeDamage(dmg);
 

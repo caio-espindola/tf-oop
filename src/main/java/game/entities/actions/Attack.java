@@ -3,7 +3,7 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class Attack implements Action {
+public class Attack extends DirectAction {
 
     public static String name = "Attack";
 
@@ -12,7 +12,6 @@ public class Attack implements Action {
         boolean user_on_front = b.find(user).onFront();
         Battle.Position t_pos = b.find(target);
         boolean target_on_front = t_pos.onFront();
-        boolean target_on_top = t_pos.onTop();
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
@@ -33,6 +32,20 @@ public class Attack implements Action {
         double ac = target_def + target_str;
 
         int dmg = (int) Math.ceil(atk / Math.pow(ac, 1/3.0));
+
+        if (checkEvasion(target)){
+
+            return false;
+
+        } else if (checkParry(target)){
+
+            double str_ratio = Math.min(target_str / user_str, 1);
+
+            dmg = (int) Math.floor(dmg * (str_ratio));
+            user.takeDamage(dmg);
+            return false;
+
+        }
 
         target.takeDamage(dmg);
 
