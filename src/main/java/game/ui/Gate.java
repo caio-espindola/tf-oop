@@ -22,14 +22,15 @@ public class Gate extends VerticalLayout {
 
         add(new Button("Entrar na guilda", e -> {
 
-            if(jogador.isEmpty()||guilda.isEmpty()) {
-            Notification.show("Preencha o nome do jogador e o nome da guilda");
-            return;
-            }
+                if(jogador.isEmpty()||guilda.isEmpty()) {
+                Notification.show("Preencha o nome do jogador e o nome da guilda");
+                return;
+                }
 
-        getUI().ifPresent(ui -> ui.navigate(Guild.class))));
-        
-        add(new Button("Voltar", e -> getUI().ifPresent(ui -> ui.navigate(MainView.class))));
-        
+            getUI().ifPresent(ui -> ui.navigate(Guild.class));
+        }));
+            
+            add(new Button("Voltar", e -> getUI().ifPresent(ui -> ui.navigate(MainView.class))));
+            
     }
 }
