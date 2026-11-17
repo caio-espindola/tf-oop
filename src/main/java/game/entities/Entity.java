@@ -15,6 +15,10 @@ public abstract class Entity implements Combatant {
     private Action[] skills;
     private ArrayList<Effect> effects;
 
+    /**
+     * Returns the skills that this type can have
+     * @param i the index of the desired skill
+     */
     protected abstract Action SKILLS(int i);
 
     public Entity(int max_hp, int max_mana, int defense, int level){
@@ -31,10 +35,16 @@ public abstract class Entity implements Combatant {
         this.stats = new Stats();
     }
 
+    /**
+     * Kills this entity
+     */
     public void kill(){
         this.alive = false;
     }
 
+    /**
+     * Revives this entity, reseting effects
+     */
     public void revive(){
         this.alive = true;
         this.clearEffects();
@@ -42,10 +52,18 @@ public abstract class Entity implements Combatant {
         this.setCurrentMana(max_mana);
     }
 
+    /**
+     *
+     * @return true if this entity is alive
+     */
     public boolean isAlive(){
         return this.alive;
     }
 
+    /**
+     * Decreases the duration of all effects by one, and removes them if duration becomes zero.
+     * Call this on all entities for each activation in Battle
+     */
     public void passEffects(){
 
         for (Effect e : this.effects){
@@ -55,12 +73,20 @@ public abstract class Entity implements Combatant {
         }
     }
 
+    /**
+     * Removes all active effects on this entity
+     */
     public void clearEffects(){
         for (Effect e : this.effects){
             this.removeEffect(e);
         }
     }
 
+    /**
+     * Adds an effect to this entity. If the same effect was already present, it is replaced with the new duration.
+     * @param e An Effect
+     * @return true if an effect was replaced or if e was null
+     */
     public boolean addEffect(Effect e){
 
         if (e == null){
@@ -85,6 +111,11 @@ public abstract class Entity implements Combatant {
 
     }
 
+    /**
+     * Looks for an active effect of the same type as the parameter and removes it.
+     * @param e A sample effect (this instance is not used)
+     * @return true if the removal was successful, false if there was no such effect
+     */
     public boolean removeEffect(Effect e){
         if (e == null){
             return true;
@@ -94,6 +125,9 @@ public abstract class Entity implements Combatant {
         return effects.remove(e);
     }
 
+    /**
+     * Checks if this entity has an effect of the same type as the parameter
+     */
     public boolean hasEffect(Effect e){
         for (Effect elem : this.effects){
             if (elem.equals(e)){
@@ -104,11 +138,16 @@ public abstract class Entity implements Combatant {
         return false;
     }
 
+    /**
+     * Deals damage to this entity. if dmg is negative, heals instead;
+     * @param dmg the amount of damage to be dealt
+     * @return true if the damage results in death
+     */
     public boolean takeDamage(int dmg){
 
         if (current_hp - dmg <= 0){
             current_hp = 0;
-            this.alive = false;
+            this.kill();
             return true;
         }
 
@@ -122,6 +161,10 @@ public abstract class Entity implements Combatant {
 
     }
 
+    /**
+     * Heals this entity by the given amount
+     * @param amount the health to be regained
+     */
     public void heal(int amount){
 
         this.takeDamage(amount * -1);
@@ -169,6 +212,10 @@ public abstract class Entity implements Combatant {
         return skills[index];
     }
 
+    /**
+     *
+     * @return The list with all the skills this entity has
+     */
     public Action[] getAllSkills(){
         return this.skills;
     }
