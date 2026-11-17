@@ -4,10 +4,15 @@ import game.entities.Entity;
 import game.entities.PlaceHolder;
 import game.levels.Battle;
 
-public class Wind implements Action {
+public class Wind extends Action {
 
     public final int cost = 25;
-    public static String name = "Wind";
+
+    public Wind() {
+        super("Wind",
+                "Release a gust of wind against all your enemies, draining their Mana. Based on DEX."
+        );
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 

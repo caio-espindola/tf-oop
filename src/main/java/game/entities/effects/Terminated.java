@@ -1,0 +1,29 @@
+package game.entities.effects;
+
+import game.entities.Entity;
+import game.levels.Battle;
+
+public class Terminated extends Effect {
+
+
+    public Terminated(int duration) {
+        super(duration);
+
+        this.name = "Terminated";
+    }
+
+    @Override
+    public boolean set(Battle b, Entity e) {
+        return true;
+    }
+
+    @Override
+    public boolean apply(Battle b, Entity e) {
+        return true;
+    }
+
+    @Override
+    public void unset(Battle b, Entity e) {
+        b.kill(e);
+    }
+}

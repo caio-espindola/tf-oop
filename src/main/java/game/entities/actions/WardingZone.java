@@ -8,7 +8,11 @@ import game.levels.Battle;
 public class WardingZone extends EffectAction {
 
     public final int cost = 50;
-    public static String name = "Warding Zone";
+
+    public WardingZone() {
+        super("Warding Zone",
+                "Cast a protective ward upon all your allies. Based on PIE");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

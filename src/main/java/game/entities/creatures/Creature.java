@@ -5,12 +5,12 @@ import game.entities.Stats;
 import game.entities.actions.Action;
 import game.levels.Battle;
 
+import java.util.ArrayList;
+
 public abstract class Creature extends Entity {
 
     protected abstract Stats STARTING_STATS(int l);
     protected abstract Action SKILLS(int i);
-
-    public abstract void action(Battle b);
 
     public Creature(int max_hp, int max_mana, int defense, int level){
         

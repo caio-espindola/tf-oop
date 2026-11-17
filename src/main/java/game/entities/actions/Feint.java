@@ -6,7 +6,10 @@ import game.levels.Battle;
 
 public class Feint extends EffectAction {
 
-    public static String name = "Feint";
+    public Feint() {
+        super("Feint",
+                "Increase your avoidance for next few turns, based on your level, giving you a 50% chance to ignore physical attacks.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 

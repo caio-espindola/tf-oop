@@ -6,7 +6,11 @@ import game.levels.Battle;
 
 public class Evade extends EffectAction {
 
-    public static String name = "Evade";
+
+    public Evade() {
+        super("Evade",
+                "Increase your avoidance for the next turn, giving you a 50% chance to ignore physical attacks");
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 

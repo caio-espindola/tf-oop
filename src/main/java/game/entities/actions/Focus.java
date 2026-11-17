@@ -6,7 +6,12 @@ import game.levels.Battle;
 public class Focus extends DirectAction {
 
     public final int cost = 10;
-    public static String name = "Focus";
+
+    public Focus() {
+        super("Focus",
+                "Fire an arrow with great accuracy, ignoring armor and avoidance. Based on DEX.");
+    }
+
 
     public boolean act(Battle b, Entity user, Entity target){
 

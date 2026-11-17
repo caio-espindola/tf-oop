@@ -6,7 +6,11 @@ import game.levels.Battle;
 public class MagicMissile extends DirectAction {
 
     public final int cost = 10;
-    public static String name = "Magic Missile";
+
+    public MagicMissile() {
+        super("Magic Missile",
+                "Launch a magical strike against an enemy. Can hit targets from afar. based on INT");
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 

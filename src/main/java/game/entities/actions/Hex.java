@@ -7,7 +7,11 @@ import game.levels.Battle;
 public class Hex extends EffectAction {
 
     public final int cost = 30;
-    public static String name = "Hex";
+
+    public Hex() {
+        super("Hex",
+                "Cast a curse upon the enemy, permanently reducing their health and mana. Based on INT");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

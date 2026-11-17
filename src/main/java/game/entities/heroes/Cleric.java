@@ -2,7 +2,8 @@ package game.entities.heroes;
 
 import game.entities.Stats;
 import game.entities.actions.*;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Cleric extends Hero {
 
@@ -32,10 +33,6 @@ public class Cleric extends Hero {
 
     protected Stats STARTING_STATS(){
         return new Stats(40, 40, 20, 100);
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Cleric(int max_hp, int max_mana, int defense, int level){

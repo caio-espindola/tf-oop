@@ -3,10 +3,15 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class StealLife implements Action {
+public class StealLife extends Action {
 
     public final int cost = 30;
-    public static String name = "Steal Life";
+
+    public StealLife() {
+        super("Steal Life",
+                "Steal health from an enemy or ally, dealing damage while healing yourself. Based on INT"
+        );
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 
@@ -37,7 +42,7 @@ public class StealLife implements Action {
         }
 
         user.takeDamage(-1 * amount);
-        target.takeDamage(amount);
+        target.takeDamage(amount); // no mana cost if target killed?
 
         user.setCurrentMana(user.getCurrentMana() - this.cost);
         return true;

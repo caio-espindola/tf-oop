@@ -3,7 +3,8 @@ package game.entities.creatures;
 import game.entities.Stats;
 import game.entities.actions.*;
 import game.entities.effects.Necromancer;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Lich extends Creature {
 
@@ -20,14 +21,10 @@ public class Lich extends Creature {
             case 2:
                 return new StealLife();
             case 3:
-                return new ;
+                return new DivineFlame();
             default:
                 return null;
         }
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Lich(int max_hp, int max_mana, int defense, int level){

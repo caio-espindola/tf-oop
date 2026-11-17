@@ -6,7 +6,11 @@ import game.levels.Battle;
 public class Smite extends DirectAction {
 
     public final int cost = 10;
-    public static String name = "Smite";
+
+    public Smite() {
+        super("Smite",
+                "Attack the enemy with a surge of holy light. Deals less damage against faraway enemies. Based on PIE.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

@@ -5,7 +5,10 @@ import game.levels.Battle;
 
 public class Arrow extends DirectAction {
 
-    public static String name = "Arrow";
+    public Arrow() {
+        super("Arrow",
+                "Fire an arrow at the enemy. Based on DEX. Can hit enemies from afar.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

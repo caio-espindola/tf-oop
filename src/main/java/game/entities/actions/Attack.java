@@ -5,7 +5,11 @@ import game.levels.Battle;
 
 public class Attack extends DirectAction {
 
-    public static String name = "Attack";
+
+    public Attack() {
+        super("Attack",
+                "Attack an enemy with your weapon. Based on STR. Can only be used from the front. Can only reach enemies in the front.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

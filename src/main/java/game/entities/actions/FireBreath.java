@@ -4,10 +4,15 @@ import game.entities.Entity;
 import game.entities.PlaceHolder;
 import game.levels.Battle;
 
-public class FireBreath implements Action {
+public class FireBreath extends Action {
 
     public final int cost = 45;
-    public static String name = "Fire Breath";
+
+    public FireBreath() {
+        super("Fire Breath",
+                "Breath fire unto your enemies, hitting them all at once. Based on INT and STR"
+        );
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 

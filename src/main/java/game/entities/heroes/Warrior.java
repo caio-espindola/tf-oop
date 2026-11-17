@@ -1,12 +1,9 @@
 package game.entities.heroes;
 
 import game.entities.Stats;
-import game.entities.actions.Action;
-import game.entities.actions.Attack;
-import game.entities.actions.Block;
-import game.entities.actions.BoogieWoogie;
-import game.entities.actions.Parry;
-import game.levels.Battle;
+import game.entities.actions.*;
+
+import java.util.ArrayList;
 
 public class Warrior extends Hero {
 
@@ -36,10 +33,6 @@ public class Warrior extends Hero {
 
     protected Stats STARTING_STATS(){
          return new Stats(120, 60, 10, 10);
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Warrior(int max_hp, int max_mana, int defense, int level){

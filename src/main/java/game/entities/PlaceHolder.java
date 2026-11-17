@@ -3,6 +3,8 @@ package game.entities;
 import game.entities.actions.Action;
 import game.levels.Battle;
 
+import java.util.ArrayList;
+
 public class PlaceHolder extends Entity{
 
     public PlaceHolder() {
@@ -14,8 +16,8 @@ public class PlaceHolder extends Entity{
     }
 
     @Override
-    public void action(Battle b) {
-        return;
+    public ArrayList<Action> action() {
+        return null;
     }
 
 }

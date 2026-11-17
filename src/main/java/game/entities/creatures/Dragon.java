@@ -3,7 +3,8 @@ package game.entities.creatures;
 import game.entities.Stats;
 import game.entities.actions.*;
 import game.entities.effects.Fearsome;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Dragon extends Creature {
 
@@ -22,10 +23,6 @@ public class Dragon extends Creature {
             default:
                 return null;
         }
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Dragon(int max_hp, int max_mana, int defense, int level){

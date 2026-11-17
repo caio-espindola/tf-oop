@@ -3,10 +3,15 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.levels.Battle;
 
-public class Heal implements Action {
+public class Heal extends Action {
 
     public final int cost = 15;
-    public static String name = "Heal";
+
+    public Heal() {
+        super("Heal",
+                "Heal the wounds of an ally, or your own. Based on PIE."
+        );
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

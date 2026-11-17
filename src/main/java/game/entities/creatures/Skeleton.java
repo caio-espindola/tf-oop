@@ -4,9 +4,9 @@ import game.entities.Stats;
 import game.entities.actions.Action;
 import game.entities.actions.Attack;
 import game.entities.actions.Block;
-import game.entities.actions.Evade;
 import game.entities.effects.Undying;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Skeleton extends Creature {
 
@@ -23,10 +23,6 @@ public class Skeleton extends Creature {
             default:
                 return null;
         }
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Skeleton(int max_hp, int max_mana, int defense, int level){

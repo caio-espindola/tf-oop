@@ -2,7 +2,8 @@ package game.entities.heroes;
 
 import game.entities.Stats;
 import game.entities.actions.*;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Mage extends Hero {
 
@@ -32,10 +33,6 @@ public class Mage extends Hero {
 
     protected Stats STARTING_STATS(){
         return new Stats(20, 50, 120 ,10);
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Mage(int max_hp, int max_mana, int defense, int level){

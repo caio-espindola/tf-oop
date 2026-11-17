@@ -2,6 +2,7 @@ package game.entities;
 
 import java.util.ArrayList;
 
+import game.entities.actions.Move;
 import game.levels.Battle;
 import game.entities.actions.Action;
 import game.entities.effects.Effect;
@@ -284,5 +285,19 @@ public abstract class Entity implements Combatant {
         this.defense = defense;
     }
 
-    public abstract void action(Battle b);
+    /**
+     * Returns all possible actions for this entity
+     * @return an ArrayList of Action
+     */
+    public ArrayList<Action> action(){
+
+        ArrayList<Action> aux = new ArrayList<>();
+        aux.add(new Move());
+
+        for (Action a : this.getAllSkills()){
+            aux.add(a);
+        }
+
+        return aux;
+    }
 }

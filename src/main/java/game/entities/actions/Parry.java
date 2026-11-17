@@ -7,7 +7,11 @@ import game.levels.Battle;
 public class Parry extends EffectAction {
 
     public final int cost = 10;
-    public static String name = "Parry";
+
+    public Parry() {
+        super("Parry",
+                "Attempt to parry the enemy's next attack, reflecting the damage back at them. Based on STR.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

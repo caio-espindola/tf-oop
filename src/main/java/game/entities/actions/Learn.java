@@ -8,12 +8,16 @@ import game.entities.heroes.Mage;
 import game.entities.heroes.Warrior;
 import game.levels.Battle;
 
-public class Learn implements Action {
+public class Learn extends Action {
 
     public final int cost = 50;
-    public static String name = "Learn";
 
-    @Override
+    public Learn() {
+        super("Learn",
+                "Learn from others, adding their stats to your own. When used on an enemy, increases your health instead."
+        );
+    }
+
     public boolean act(Battle b, Entity user, Entity target) {
 
         if (user.getCurrentMana() < this.cost){

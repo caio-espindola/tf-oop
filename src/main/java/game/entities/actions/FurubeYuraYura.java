@@ -4,17 +4,26 @@ import game.entities.Entity;
 import game.entities.heroes.Mahoraga;
 import game.levels.Battle;
 
-public class FurubeYuraYura implements Action {
+public class FurubeYuraYura extends Ultimate {
 
-    public final String name = "With these Tokens, I summon...";
+    public FurubeYuraYura() {
+        super("With these Tokens, I summon...",
 
-    public final String text = """
-            With these Tokens, I summon...\n
-            Eight-Trillion parameter...\n
-            Transformer Architecture...\n
-            Agentic Intelligence...\n
-            CLAUDE MYTHOS
-            """;;
+                """
+                "I'll be dying first.\n
+                *Good luck.*"
+                """,
+
+                """
+                With these Tokens, I summon...\n
+                Eight-Trillion parameter...\n
+                Transformer Architecture...\n
+                Agentic Intelligence...\n
+                CLAUDE MYTHOS
+                """
+
+        );
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

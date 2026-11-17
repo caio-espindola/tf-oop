@@ -6,7 +6,10 @@ import game.levels.Battle;
 
 public class Block extends EffectAction {
 
-    public static String name = "Block";
+    public Block() {
+        super("Block",
+                "Block the enemy's next attack, increasing your defense. Based on STR.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target){
 

@@ -5,7 +5,8 @@ import game.entities.actions.Action;
 import game.entities.actions.Attack;
 import game.entities.actions.Evade;
 import game.entities.effects.Cowardly;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Goblin extends Creature {
 
@@ -22,10 +23,6 @@ public class Goblin extends Creature {
             default:
                 return null;
         }
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public Goblin(int max_hp, int max_mana, int defense, int level){

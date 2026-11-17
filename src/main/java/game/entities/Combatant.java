@@ -1,6 +1,9 @@
 package game.entities;
 
+import game.entities.actions.Action;
 import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public interface Combatant {
 
@@ -26,5 +29,5 @@ public interface Combatant {
 
     public void heal(int amount);
 
-    public void action(Battle b);
+    public ArrayList<Action> action();
 }

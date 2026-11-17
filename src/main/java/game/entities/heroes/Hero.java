@@ -7,6 +7,8 @@ import game.exceptions.InventoryFullException;
 import game.items.*;
 import game.levels.Battle;
 
+import java.util.ArrayList;
+
 public abstract class Hero extends Entity {
 
     private Gear weapon, armor, amulet;
@@ -122,8 +124,6 @@ public abstract class Hero extends Entity {
 
         return this.getGear(g);
     }
-
-    public abstract void action(Battle b);
 
     public Gear getGear(Gear g){
 

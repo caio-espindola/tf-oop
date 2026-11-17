@@ -4,7 +4,11 @@ import game.entities.Entity;
 import game.entities.effects.Evading;
 import game.entities.effects.Parrying;
 
-public abstract class DirectAction implements Action {
+public abstract class DirectAction extends Action {
+
+    public DirectAction(String name, String description) {
+        super(name, description);
+    }
 
     public static boolean checkEvasion(Entity e){
 

@@ -5,10 +5,15 @@ import game.entities.PlaceHolder;
 import game.entities.creatures.Skeleton;
 import game.levels.Battle;
 
-public class RaiseDead implements Action {
+public class RaiseDead extends Action {
 
     public final int cost = 30;
-    public static String name = "Raise Dead";
+
+    public RaiseDead() {
+        super("Raise Dead",
+                "Summon a skeleton to an unoccupied position. Based on INT."
+        );
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 

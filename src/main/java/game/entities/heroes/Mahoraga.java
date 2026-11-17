@@ -3,7 +3,8 @@ package game.entities.heroes;
 import game.entities.Stats;
 import game.entities.actions.*;
 import game.entities.effects.MachineLearning;
-import game.levels.Battle;
+
+import java.util.ArrayList;
 
 public class Mahoraga extends Cleric{
 
@@ -34,10 +35,6 @@ public class Mahoraga extends Cleric{
 
     protected Stats STARTING_STATS(){
         return new Stats(100, 100, 100, 100);
-    }
-
-    public boolean action(Battle b){
-
     }
 
     public boolean levelUp(Stats alloc){

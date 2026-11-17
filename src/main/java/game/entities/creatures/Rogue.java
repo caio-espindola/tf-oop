@@ -2,11 +2,12 @@ package game.entities.creatures;
 
 import game.entities.Stats;
 import game.entities.actions.Action;
-import game.levels.Battle;
 import game.entities.actions.Attack;
 import game.entities.actions.Evade;
 import game.entities.actions.Feint;
 import game.entities.effects.Thief;
+
+import java.util.ArrayList;
 
 public class Rogue extends Creature {
 
@@ -25,10 +26,6 @@ public class Rogue extends Creature {
             default:
                 return null;
         }
-    }
-    
-    public boolean action(Battle b){
-
     }
 
     public Rogue(int max_hp, int max_mana, int defense, int level) {

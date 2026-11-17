@@ -7,7 +7,11 @@ import game.levels.Battle;
 public class MageShield extends EffectAction {
 
     public final int cost = 15;
-    public static String name = "Mage Shield";
+
+    public MageShield() {
+        super("Mage Shield",
+                "Cast a magical shield around yourself or an ally, granting protection. Based on INT.");
+    }
 
     public boolean act(Battle b, Entity user, Entity target) {
 
