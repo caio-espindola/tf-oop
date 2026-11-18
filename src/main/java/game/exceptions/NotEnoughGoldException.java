@@ -1,6 +1,6 @@
 package game.exceptions;
 
-public class NotEnoughGoldException extends RuntimeException {
+public class NotEnoughGoldException extends Exception {
 
     public NotEnoughGoldException(String message) {
         super(message);

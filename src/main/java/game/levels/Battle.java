@@ -220,8 +220,10 @@ public class Battle {
             return false;
         }
 
-        if (aux != null){
+        if (! (aux instanceof PlaceHolder)){
             heroes[h_pos.ordinal()] = aux;
+        } else {
+            heroes[h_pos.ordinal()] = new PlaceHolder();
         }
 
         heroes[p.ordinal()] = h;
@@ -242,8 +244,10 @@ public class Battle {
             return false;
         }
 
-        if (aux != null){
+        if (! (aux instanceof PlaceHolder)){
             enemies[c_pos.ordinal() - 4] = aux;
+        } else {
+            enemies[c_pos.ordinal() - 4] = new PlaceHolder();
         }
 
         enemies[p.ordinal() - 4] = c;

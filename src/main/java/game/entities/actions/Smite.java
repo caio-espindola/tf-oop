@@ -1,6 +1,9 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
+import game.exceptions.OutOfRangeException;
 import game.levels.Battle;
 
 public class Smite extends DirectAction {
@@ -12,18 +15,22 @@ public class Smite extends DirectAction {
                 "Attack the enemy with a surge of holy light. Deals less damage against faraway enemies. Based on PIE.");
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException, OutOfRangeException {
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
         boolean user_on_back = b.find(user).onBack();
         boolean target_on_back = b.find(target).onBack();
 
-        if (on_same_side || user_on_back){
-            return false;
+        if (on_same_side){
+            throw new InvalidTargetException("Cannot be used against an ally");
+        }
+
+        if (user_on_back){
+            throw new OutOfRangeException("Can only be used from the front");
         }
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         int user_pie = user.getStats().getPIE();

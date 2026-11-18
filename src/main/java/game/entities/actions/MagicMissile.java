@@ -1,6 +1,8 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class MagicMissile extends DirectAction {
@@ -12,16 +14,16 @@ public class MagicMissile extends DirectAction {
                 "Launch a magical strike against an enemy. Can hit targets from afar. based on INT");
     }
 
-    public boolean act(Battle b, Entity user, Entity target) {
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException {
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
-            return false;
+            throw new InvalidTargetException("Cannot be used against an ally");
         }
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         int user_int = user.getStats().getINT();

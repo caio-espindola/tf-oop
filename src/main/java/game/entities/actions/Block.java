@@ -2,6 +2,7 @@ package game.entities.actions;
 
 import game.entities.Entity;
 import game.entities.effects.Blocking;
+import game.exceptions.InvalidTargetException;
 import game.levels.Battle;
 
 public class Block extends EffectAction {
@@ -11,10 +12,10 @@ public class Block extends EffectAction {
                 "Block the enemy's next attack, increasing your defense. Based on STR.");
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException {
 
         if (user != target){
-            return false;
+            throw new InvalidTargetException("Can only be used on this character");
         }
 
         return user.addEffect(new Blocking(1));

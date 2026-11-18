@@ -1,6 +1,8 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.OutOfRangeException;
 import game.levels.Battle;
 
 public class Attack extends DirectAction {
@@ -11,7 +13,7 @@ public class Attack extends DirectAction {
                 "Attack an enemy with your weapon. Based on STR. Can only be used from the front. Can only reach enemies in the front.");
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, OutOfRangeException {
 
         boolean user_on_front = b.find(user).onFront();
         Battle.Position t_pos = b.find(target);
@@ -19,11 +21,15 @@ public class Attack extends DirectAction {
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
-            return false;
+            throw new InvalidTargetException("Cannot be used against an ally");
         }
 
-        if (!(user_on_front && target_on_front)){
-            return false;
+        if (! user_on_front){
+            throw new OutOfRangeException("Can only be used from the front");
+        }
+
+        if (! target_on_front){
+            throw new OutOfRangeException("Can only reach enemies in the front");
         }
 
         int user_str = user.getStats().getSTR();

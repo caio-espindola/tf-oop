@@ -1,6 +1,8 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class StealLife extends Action {
@@ -13,14 +15,14 @@ public class StealLife extends Action {
         );
     }
 
-    public boolean act(Battle b, Entity user, Entity target) {
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException {
 
         if (user == target){
-            return false;
+            throw new InvalidTargetException("Can only be used on another character");
         }
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         double r = 1 + ((Math.random())-0.5)/2; // generates a random double in [0.75 , 1.25[
