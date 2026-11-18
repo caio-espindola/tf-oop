@@ -17,6 +17,7 @@ public class MainLayout extends AppLayout {
         SideNav menu = new SideNav();
         menu.addItem(new SideNavItem("Salão da Guilda", Guild.class));
         menu.addItem(new SideNavItem("Inventário", Inventory.class));
+        menu.addItem(new SideNavItem("Loja", Shop.class));
         menu.addItem(new SideNavItem("Arena de Batalha", Arena.class));
         menu.addItem(new SideNavItem("Crônicas", Chronicles.class));
         menu.addItem(new SideNavItem("Sair para o menu", MainView.class));

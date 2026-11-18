@@ -2,6 +2,7 @@ package game.ui;
 
 import java.util.List;
 
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -11,6 +12,9 @@ import com.vaadin.flow.router.Route;
 //Guild hall: list the party members and stats
 @Route(value = "guild", layout = MainLayout.class)
 public class Guild extends VerticalLayout {
+
+    //Future equippment implementation
+    //private final ComboBox<String> equipamentos;
 
     //MOCK: temporary type just to fill the grid, replace with the real hero class
     private record HeroMock(String nome, int nivel, int vida, int ataque, int defesa) {}
@@ -27,6 +31,7 @@ public class Guild extends VerticalLayout {
 
         Grid<HeroMock> grid = new Grid<>();
         grid.addColumn(HeroMock::nome).setHeader("Nome");
+        //equipamento1 = new ComboBox<>("Equipamento Heroi 1")
         grid.addColumn(HeroMock::nivel).setHeader("Nível").setSortable(true);
         grid.addColumn(HeroMock::vida).setHeader("Vida").setSortable(true);
         grid.addColumn(HeroMock::ataque).setHeader("Ataque");
