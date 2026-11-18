@@ -6,6 +6,7 @@ import game.entities.heroes.Archer;
 import game.entities.heroes.Cleric;
 import game.entities.heroes.Mage;
 import game.entities.heroes.Warrior;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class Learn extends Action {
@@ -18,10 +19,10 @@ public class Learn extends Action {
         );
     }
 
-    public boolean act(Battle b, Entity user, Entity target) {
+    public boolean act(Battle b, Entity user, Entity target) throws NotEnoughManaException {
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         Stats s = user.getStats();

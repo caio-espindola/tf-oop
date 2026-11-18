@@ -1,6 +1,7 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
 import game.levels.Battle;
 
 public class Arrow extends DirectAction {
@@ -10,12 +11,12 @@ public class Arrow extends DirectAction {
                 "Fire an arrow at the enemy. Based on DEX. Can hit enemies from afar.");
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException {
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
-            return false;
+            throw new InvalidTargetException("Cannot be used against allies");
         }
 
         int user_dex = user.getStats().getDEX();

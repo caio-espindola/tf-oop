@@ -1,6 +1,8 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class Murasaki extends Ultimate {
@@ -22,7 +24,7 @@ public class Murasaki extends Ultimate {
         );
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException {
 
     }
 

@@ -1,6 +1,7 @@
 package game.entities.actions;
 
 import game.entities.Entity;
+import game.exceptions.InvalidTargetException;
 import game.levels.Battle;
 
 public class Move extends Action {
@@ -12,22 +13,15 @@ public class Move extends Action {
         );
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException {
 
         Battle.Position t_pos = b.find(target);
-        Battle.Position u_pos = b.find(user);
 
         if (t_pos == null){
-            return false;
+            throw new InvalidTargetException("Target not found");
         }
 
-        if (!(target.isAlive()) && t_pos.onBack() && u_pos.onFront()){
-            return false;
-        }
-
-
-
-        b.move(user, b.find(target));
+        return b.move(user, b.find(target));
 
     }
 }

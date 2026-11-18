@@ -3,6 +3,8 @@ package game.entities.actions;
 import game.entities.Entity;
 import game.entities.PlaceHolder;
 import game.entities.creatures.Skeleton;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class RaiseDead extends Action {
@@ -15,14 +17,14 @@ public class RaiseDead extends Action {
         );
     }
 
-    public boolean act(Battle b, Entity user, Entity target) {
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException {
 
         if (!(target instanceof PlaceHolder)){
-            return false;
+            throw new InvalidTargetException("Can only be used on an empty position");
         }
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         double r = 1 + ((Math.random())-0.5)/2; // generates a random double in [0.75 , 1.25[

@@ -2,6 +2,9 @@ package game.entities.actions;
 
 import game.entities.Entity;
 import game.entities.effects.Hexed;
+import game.exceptions.InvalidActionException;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class Hex extends EffectAction {
@@ -13,20 +16,20 @@ public class Hex extends EffectAction {
                 "Cast a curse upon the enemy, permanently reducing their health and mana. Based on INT");
     }
 
-    public boolean act(Battle b, Entity user, Entity target){
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException, InvalidActionException {
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (on_same_side){
-            return false;
+            throw new InvalidTargetException("Cannot be used against an ally");
         }
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         if (target.hasEffect(new Hexed(-1))){
-            return false;
+            throw new InvalidActionException("Cannot be used twice on the same target");
         }
 
         target.addEffect(new Hexed(-1));

@@ -2,6 +2,9 @@ package game.entities.actions;
 
 import game.entities.Entity;
 import game.entities.effects.Terminated;
+import game.exceptions.InvalidActionException;
+import game.exceptions.InvalidTargetException;
+import game.exceptions.NotEnoughManaException;
 import game.levels.Battle;
 
 public class DivineFlame extends Ultimate {
@@ -22,20 +25,20 @@ public class DivineFlame extends Ultimate {
                 """);
     }
 
-    public boolean act(Battle b, Entity user, Entity target) {
+    public boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException, InvalidActionException {
 
         boolean on_same_side = b.find(user).sameSide(b.find(target));
 
         if (! on_same_side){
-            return false;
+            throw new InvalidTargetException("Cannot be used on an ally");
         }
 
         if (target.hasEffect(new Terminated(0))){
-            return false;
+            throw new InvalidActionException("Cannot be used twice on the same target");
         }
 
         if (user.getCurrentMana() < this.cost){
-            return false;
+            throw new NotEnoughManaException();
         }
 
         user.setCurrentMana(user.getCurrentMana() - this.cost);
