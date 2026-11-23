@@ -21,7 +21,7 @@ public class Arena extends VerticalLayout {
         missao.setLabel("Missão");
         missao.setItems("Vila dos Goblins", "Cripta Fora de Escopo", "Covil do Dragão", "Masmorras do Heap");
 
-        add( missao);
+        add(missao);
 
         //MOCK: fixed log lines, the real log comes from the battle turn by turn
         add(new Paragraph("Turno 1: Aldric ataca Goblin e causa 9 de dano."));

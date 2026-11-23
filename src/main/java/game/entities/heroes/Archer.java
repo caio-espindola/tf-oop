@@ -2,6 +2,9 @@ package game.entities.heroes;
 
 import game.entities.Stats;
 import game.entities.actions.*;
+import game.items.Amulet;
+import game.items.Armor;
+import game.items.Weapon;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,16 @@ public class Archer extends Hero {
 
     protected Stats STARTING_STATS(){
         return new Stats(60, 100, 30, 10);
+    }
+
+    protected void INIT_GEAR() {
+        Weapon w = new Weapon("Simple Bow",    0, new Stats(10, 20, 0, 0), 0, null);
+        Armor  a = new Armor ("Leather Armor", 0, new Stats(10, 20, 0, 0), 0, null);
+        Amulet m = new Amulet("Necklace",      0, new Stats(0, 0, 15, 15), 0, null);
+
+        this.equip(w, null);
+        this.equip(a, null);
+        this.equip(m, null);
     }
 
     public Archer(int max_hp, int max_mana, int defense, int level){

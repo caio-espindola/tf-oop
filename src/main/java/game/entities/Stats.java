@@ -22,6 +22,10 @@ public class Stats {
         this.pie = pie;
     }
 
+    public String toString(){
+        return "STR: " + this.str + "/ DEX: " + this.dex + "/ INT: " + this.intl + "/ PIE: " + this.pie;
+    }
+
     public int getSTR(){
         return this.str;
     }

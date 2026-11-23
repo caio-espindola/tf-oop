@@ -2,6 +2,9 @@ package game.entities.heroes;
 
 import game.entities.Stats;
 import game.entities.actions.*;
+import game.items.Amulet;
+import game.items.Armor;
+import game.items.Weapon;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,16 @@ public class Mage extends Hero {
 
     protected Stats STARTING_STATS(){
         return new Stats(20, 50, 120 ,10);
+    }
+
+    protected void INIT_GEAR() {
+        Weapon w = new Weapon("Staff",    0, new Stats(0, 0, 30, 0), 0,   null);
+        Armor a  = new Armor ("Robes",    0, new Stats(0, 10, 10, 10), 0, null);
+        Amulet m = new Amulet("Necklace", 0, new Stats(0, 0, 15, 15), 0,  null);
+
+        this.equip(w, null);
+        this.equip(a, null);
+        this.equip(m, null);
     }
 
     public Mage(int max_hp, int max_mana, int defense, int level){

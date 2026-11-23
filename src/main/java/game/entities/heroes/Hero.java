@@ -19,6 +19,7 @@ public abstract class Hero extends Entity {
     protected abstract int HP_INCREASE();
     protected abstract int MANA_INCREASE();
     protected abstract Stats STARTING_STATS();
+    protected abstract void INIT_GEAR();
 
     public Hero(int max_hp, int max_mana, int defense, int level){
 
@@ -32,6 +33,7 @@ public abstract class Hero extends Entity {
         this.setStats(STARTING_STATS());
 
         this.alive = true;
+        this.xp = this.level_up_available = 0;
 
     }
 
@@ -87,6 +89,10 @@ public abstract class Hero extends Entity {
 
         return true;
 
+    }
+
+    public Gear[] getAllGear(){
+        return new Gear[]{this.weapon, this.armor, this.amulet};
     }
 
     public void equip(Gear e, Inventory<Item> inv) throws InventoryFullException {

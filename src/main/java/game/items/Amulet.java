@@ -5,7 +5,7 @@ import game.entities.effects.Effect;
 import game.entities.heroes.Hero;
 import game.exceptions.InventoryFullException;
 
-public abstract class Amulet extends Gear {
+public class Amulet extends Gear {
 
     public Amulet(String name, int value, Stats bonuses, int rarity, Effect trait){
 
