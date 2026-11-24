@@ -304,7 +304,7 @@ public class Battle {
         }
 
         current.passEffects();
-        current.action(this);
+        current.action();
 
     }
 

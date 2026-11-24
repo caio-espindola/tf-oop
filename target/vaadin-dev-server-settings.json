@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "/home/caioespindola/projects/pucrs/tf-oop/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "/home/caioespindola/projects/pucrs/tf-oop/./frontend/generated/jar-resources",
+  "staticOutput": "/home/caioespindola/projects/pucrs/tf-oop/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "/home/caioespindola/projects/pucrs/tf-oop/target/classes/META-INF/VAADIN/config",
+  "frontendBundleOutput": "/home/caioespindola/projects/pucrs/tf-oop/target/classes/META-INF/VAADIN/webapp",
+  "devBundleOutput": "/home/caioespindola/projects/pucrs/tf-oop/target/dev-bundle/webapp",
+  "devBundleStatsOutput": "/home/caioespindola/projects/pucrs/tf-oop/target/dev-bundle/config",
+  "jarResourcesFolder": "/home/caioespindola/projects/pucrs/tf-oop/./frontend/generated/jar-resources",
+  "themeName": "",
+  "clientServiceWorkerSource": "/home/caioespindola/projects/pucrs/tf-oop/target/sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}

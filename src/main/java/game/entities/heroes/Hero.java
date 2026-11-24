@@ -35,6 +35,7 @@ public abstract class Hero extends Entity {
         this.alive = true;
         this.xp = this.level_up_available = 0;
 
+        this.INIT_GEAR();
     }
 
     public int getXP() {

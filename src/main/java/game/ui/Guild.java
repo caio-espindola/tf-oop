@@ -1,9 +1,12 @@
 package game.ui;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,7 +23,7 @@ import game.entities.heroes.*;
 @Route(value = "guild", layout = MainLayout.class)
 public class Guild extends VerticalLayout {
 
-    private static List<Hero> heroes;
+    private static List<Hero> heroes = new ArrayList<>();
 
     private void initializeHeroes(){
 
@@ -46,7 +49,9 @@ public class Guild extends VerticalLayout {
 
         add(new H2("Guild Hall"));
 
-        Grid<Hero> grid = new Grid<>(Hero.class);
+        Grid<Hero> grid = new Grid<>(Hero.class, false);
+
+        grid.addColumn(toggleDetails(grid)).setWidth("80px").setFlexGrow(0).setFrozen(true);
 
         grid.addColumn(Hero::getName).setHeader("Name");
         grid.addColumn(Hero::getLevel).setHeader("Level").setSortable(true);
@@ -54,9 +59,11 @@ public class Guild extends VerticalLayout {
         grid.addColumn(Hero::getMaxMana).setHeader("Max Mana");
         grid.addColumn(Hero::getDefense).setHeader("Defense");
 
-        grid.setItems(heroes);
+
         grid.setDetailsVisibleOnClick(false);
         grid.setItemDetailsRenderer(heroDetailsRenderer());
+
+        grid.setItems(heroes);
 
         add(grid);
     }
@@ -81,7 +88,7 @@ public class Guild extends VerticalLayout {
     }
 
     private static ComponentRenderer<HeroDetailLayout, Hero> heroDetailsRenderer() {
-        return new ComponentRenderer<>(() -> new HeroDetailLayout(), HeroDetailLayout::setHero);
+        return new ComponentRenderer<>(HeroDetailLayout::new, HeroDetailLayout::setHero);
     }
 
     private static class HeroDetailLayout extends HorizontalLayout {
@@ -111,19 +118,32 @@ public class Guild extends VerticalLayout {
             skills = new Details[]{s1, s2, s3, s4};
             gear = new Details[]{w, a, m};
 
+            Stream.of(skills).forEach(s -> leftPanel.add(s));
+            Stream.of(gear).forEach(s -> rightPanel.add(s));
+
+            add(leftPanel);
+            add(rightPanel);
+
         }
 
         public void setHero(Hero h){
 
             for (int i = 0; i < 4; i++){
-                skills[i].setSummaryText(h.getAllSkills()[i].name);
-                skills[i].setContent(new Paragraph(h.getAllSkills()[i].description));
+
+                String skill_name = (h.getAllSkills()[i] == null) ? "Locked" : h.getAllSkills()[i].name;
+                String skill_desc = (h.getAllSkills()[i] == null) ? "This Skill is still locked" : h.getAllSkills()[i].description;
+
+                skills[i].setSummaryText(skill_name);
+                skills[i].add(new Paragraph(skill_desc));
             }
 
             for (int i = 0; i < 3; i++){
-                gear[i].setSummaryText(h.getAllGear()[i].getName());
-                Stats aux = h.getAllGear()[i].getBonuses();
-                gear[i].setContent(new Paragraph(aux.toString()));
+
+                String gear_name = (h.getAllGear()[i] == null) ? "Empty" : h.getAllGear()[i].getName();
+                String gear_bonuses = (h.getAllGear()[i] == null) ? "" : h.getAllGear()[i].getBonuses().toString();
+
+                gear[i].setSummaryText(gear_name);
+                gear[i].add(new Paragraph(gear_bonuses));
             }
 
         }

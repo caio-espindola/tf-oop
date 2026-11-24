@@ -23,7 +23,7 @@ public class Stats {
     }
 
     public String toString(){
-        return "STR: " + this.str + "/ DEX: " + this.dex + "/ INT: " + this.intl + "/ PIE: " + this.pie;
+        return "STR: " + this.str + " / DEX: " + this.dex + " / INT: " + this.intl + " / PIE: " + this.pie;
     }
 
     public int getSTR(){
