@@ -37,7 +37,7 @@ public class FurubeYuraYura extends Ultimate {
         Battle.Position user_pos = b.find(user);
 
         b.kill(user);
-        b.add(big_raga, user_pos);
+        return b.add(big_raga, user_pos);
 
     }
 
