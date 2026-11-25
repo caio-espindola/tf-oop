@@ -26,9 +26,9 @@ game/entities/effects/Undying.class
 game/items/Amulet.class
 game/entities/actions/FurubeYuraYura.class
 game/items/Armor.class
-game/ui/Inventory$ItemMock.class
 game/entities/actions/Feint.class
 game/ui/Chronicles.class
+game/ui/Inventory$ItemDetailLayout.class
 game/entities/effects/Terminated.class
 game/levels/BattleRegistry.class
 game/exceptions/PersistenceException.class
@@ -51,8 +51,6 @@ game/entities/actions/Evade.class
 game/entities/heroes/Archer.class
 game/entities/Combatant.class
 game/entities/effects/Necromancer.class
-game/ui/Shop$ItemMock.class
-game/items/Inventory.class
 game/entities/effects/MachineLearning.class
 game/entities/actions/Wind.class
 game/entities/creatures/Creature.class
@@ -64,7 +62,6 @@ game/entities/actions/Parry.class
 game/ui/Summary.class
 game/entities/actions/MagicMissile.class
 game/ui/Shop.class
-game/levels/Guild.class
 game/items/Item.class
 game/ui/Inventory.class
 game/entities/effects/Evading.class

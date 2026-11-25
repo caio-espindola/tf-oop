@@ -13,4 +13,7 @@ public class Amulet extends Gear {
 
     }
 
+    public String getType() {
+        return "Amulet";
+    }
 }

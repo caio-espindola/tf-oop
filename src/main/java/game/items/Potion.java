@@ -2,6 +2,7 @@ package game.items;
 
 import game.entities.Entity;
 import game.entities.effects.Effect;
+import game.ui.Inventory;
 
 public abstract class Potion extends Item implements Consumable {
 
@@ -15,10 +16,14 @@ public abstract class Potion extends Item implements Consumable {
 
     }
 
-    public void consume(Entity e, Inventory<Item> inv){
+    public String getType(){
+        return "Potion";
+    }
+
+    public void consume(Entity e, Inventory inv){
 
         e.addEffect(this.effect);
-        inv.RemoveFromInventory(this);
+        inv.removeFromInventory(this);
 
     }
 

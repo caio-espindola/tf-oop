@@ -21,6 +21,7 @@ import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.router.Route;
 import game.entities.Stats;
 import game.entities.heroes.*;
+import game.items.Weapon;
 
 //Guild hall: list the party members and stats
 @Route(value = "guild", layout = MainLayout.class)
@@ -29,9 +30,27 @@ public class Guild extends VerticalLayout {
     private static List<Hero> heroes = new ArrayList<>();
     private static Grid<Hero> grid;
     private static Dialog level_up_dialog;
-    private static Stats level_up_alloc;
 
-    private void initializeHeroes(){
+    public Guild() {
+
+        add(new H2("Guild Hall"));
+
+        // HERO GRID
+
+        grid = createHeroGrid();
+        add(grid);
+
+        // LEVEL UP POPUP
+
+        level_up_dialog = new Dialog("Level Up Hero");
+        add(level_up_dialog);
+    }
+
+    public static List<Hero> getHeroes(){
+        return heroes;
+    }
+
+    private static void initializeHeroes(){
 
         Hero[] aux = new Hero[4];
 
@@ -49,15 +68,39 @@ public class Guild extends VerticalLayout {
         heroes = List.of(aux);
     }
 
-    private static void levelUpHero(Hero h) {
+    private static Grid<Hero> createHeroGrid(){
 
-        level_up_dialog.open();
-        level_up_alloc = null;
+        Grid<Hero> grid = new Grid<>(Hero.class, false);
+
+        grid.addColumn(toggleDetails(grid)).setWidth("80px").setFlexGrow(0).setFrozen(true);
+
+        grid.addColumn(Hero::getName).setHeader("Name");
+        grid.addColumn(Hero::getLevel).setHeader("Level").setSortable(true);
+        grid.addColumn(Hero::getMaxHP).setHeader("Max HP").setSortable(true);
+        grid.addColumn(Hero::getMaxMana).setHeader("Max Mana");
+        grid.addColumn(Hero::getDefense).setHeader("Defense");
+
+        grid.setDetailsVisibleOnClick(false);
+        grid.setItemDetailsRenderer(heroDetailsRenderer());
+        grid.setHeight("800px");
+
+        initializeHeroes();
+        grid.setItems(heroes);
+
+        return grid;
+    }
+
+    // LEVEL UP DIALOG
+
+    private static void invalidAllocationMessage(){
 
         Notification notif = new Notification();
 
-        int max_alloc = h.MAX_ALLOCS_BY_LEVEL[h.getLevel()];
+        Notification.show("Invalid Point Allocation");
+        notif.setPosition(Notification.Position.MIDDLE);
+    }
 
+    private static IntegerField[] createAllocationFields(){
         IntegerField str = new IntegerField();
         IntegerField dex = new IntegerField();
         IntegerField intl = new IntegerField();
@@ -68,11 +111,19 @@ public class Guild extends VerticalLayout {
         intl.setLabel("INT");
         pie.setLabel("PIE");
 
-        // BUTTONS
+        return fields;
+    }
+
+    private static HorizontalLayout createAllocationButtons(IntegerField[] fields, Hero h){
 
         HorizontalLayout buttons = new HorizontalLayout();
         Button confirm = new Button("Confirm");
         Button cancel = new Button("Cancel");
+        buttons.add(cancel, confirm);
+
+        int max_alloc = h.MAX_ALLOCS_BY_LEVEL[h.getLevel()];
+
+        cancel.addClickListener(clickEvent -> level_up_dialog.close());
 
         confirm.addClickListener(clickEvent -> {
 
@@ -80,21 +131,31 @@ public class Guild extends VerticalLayout {
 
             if (current_alloc != max_alloc){
 
-                notif.show("Invalid Point Allocation");
-                notif.setPosition(Notification.Position.MIDDLE);
+                invalidAllocationMessage();
 
-            } else if (current_alloc == max_alloc){
-                h.levelUp(new Stats(str.getValue(), dex.getValue(), intl.getValue(), pie.getValue()));
+            } else {
+
+                h.levelUp(new Stats(fields[0].getValue(),
+                                    fields[1].getValue(),
+                                    fields[2].getValue(),
+                                    fields[3].getValue()));
+
                 level_up_dialog.close();
                 grid.setDetailsVisible(h, false);
             }
         });
 
-        cancel.addClickListener(clickEvent -> level_up_dialog.close());
+        return buttons;
 
-        buttons.add(cancel, confirm);
+    }
 
-        // ALLOCATOR
+    private static void levelUpHero(Hero h) {
+
+        level_up_dialog.open();
+
+        int max_alloc = h.MAX_ALLOCS_BY_LEVEL[h.getLevel()];
+        IntegerField[] fields = createAllocationFields();
+        HorizontalLayout buttons = createAllocationButtons(fields, h);
 
         VerticalLayout fields_layout = new VerticalLayout();
 
@@ -110,38 +171,7 @@ public class Guild extends VerticalLayout {
         level_up_dialog.add(new Paragraph("Points to be Allocated: " + max_alloc), fields_layout, buttons);
     }
 
-    public Guild() {
-
-        add(new H2("Guild Hall"));
-
-        // HERO GRID
-
-        grid = new Grid<>(Hero.class, false);
-
-        grid.addColumn(toggleDetails(grid)).setWidth("80px").setFlexGrow(0).setFrozen(true);
-
-        grid.addColumn(Hero::getName).setHeader("Name");
-        grid.addColumn(Hero::getLevel).setHeader("Level").setSortable(true);
-        grid.addColumn(Hero::getMaxHP).setHeader("Max HP").setSortable(true);
-        grid.addColumn(Hero::getMaxMana).setHeader("Max Mana");
-        grid.addColumn(Hero::getDefense).setHeader("Defense");
-
-        grid.setDetailsVisibleOnClick(false);
-        grid.setItemDetailsRenderer(heroDetailsRenderer());
-        grid.setHeight("800px");
-
-        this.initializeHeroes();
-        grid.setItems(heroes);
-
-        add(grid);
-
-        // LEVEL UP POPUP
-
-        level_up_dialog = new Dialog("Level Up Hero");
-        level_up_dialog.close();
-
-        add(level_up_dialog);
-    }
+    // DETAIL RENDERER
 
     private static Renderer<Hero> toggleDetails(Grid<Hero> grid){
         return LitRenderer
@@ -247,8 +277,6 @@ public class Guild extends VerticalLayout {
                 stats[i].setText(stat_name + ": " + stat_val);
 
             }
-
-            h.addXP(120);
 
             int xp_val = h.getXP();
             stats[4].setText("XP: " + xp_val + " / " + 100*h.getLevel()); // TODO: fix this bullshit

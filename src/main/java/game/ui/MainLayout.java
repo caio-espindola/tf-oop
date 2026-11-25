@@ -15,12 +15,12 @@ public class MainLayout extends AppLayout {
 
         //each item points to the class of a screen, the path comes from its @Route
         SideNav menu = new SideNav();
-        menu.addItem(new SideNavItem("Salão da Guilda", Guild.class));
-        menu.addItem(new SideNavItem("Inventário", Inventory.class));
-        menu.addItem(new SideNavItem("Loja", Shop.class));
-        menu.addItem(new SideNavItem("Arena de Batalha", Arena.class));
-        menu.addItem(new SideNavItem("Crônicas", Chronicles.class));
-        menu.addItem(new SideNavItem("Sair para o menu", MainView.class));
+        menu.addItem(new SideNavItem("Guild Hall", Guild.class));
+        menu.addItem(new SideNavItem("Inventory", Inventory.class));
+        menu.addItem(new SideNavItem("Shop", Shop.class));
+        menu.addItem(new SideNavItem("Arena", Arena.class));
+        menu.addItem(new SideNavItem("Chronicles", Chronicles.class));
+        menu.addItem(new SideNavItem("Exit to Menu", MainView.class));
         addToDrawer(menu);
     }
 }

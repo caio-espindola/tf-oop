@@ -6,8 +6,6 @@ import game.items.Amulet;
 import game.items.Armor;
 import game.items.Weapon;
 
-import java.util.ArrayList;
-
 public class Mage extends Hero {
 
     protected int HP_INCREASE(){
@@ -43,9 +41,9 @@ public class Mage extends Hero {
         Armor a  = new Armor ("Robes",    0, new Stats(0, 10, 10, 10), 0, null);
         Amulet m = new Amulet("Necklace", 0, new Stats(0, 0, 15, 15), 0,  null);
 
-        this.equip(w, null);
-        this.equip(a, null);
-        this.equip(m, null);
+        this.equip(w);
+        this.equip(a);
+        this.equip(m);
     }
 
     public Mage(int max_hp, int max_mana, int defense, int level){

@@ -2,6 +2,7 @@ package game.items;
 
 public abstract class Item {
 
+    public String description;
     private String name;
     private int value;
 
@@ -11,6 +12,8 @@ public abstract class Item {
         this.value = value;
 
     }
+
+    public abstract String getType();
 
     public String getName(){
         return this.name;

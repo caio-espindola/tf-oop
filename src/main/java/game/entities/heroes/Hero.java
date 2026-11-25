@@ -4,6 +4,7 @@ import game.entities.Entity;
 import game.entities.Stats;
 import game.exceptions.InventoryFullException;
 import game.items.*;
+import game.ui.Inventory;
 
 public abstract class Hero extends Entity {
 
@@ -101,14 +102,14 @@ public abstract class Hero extends Entity {
         return new Gear[]{this.weapon, this.armor, this.amulet};
     }
 
-    public void equip(Gear e, Inventory<Item> inv) throws InventoryFullException {
+    public void equip(Gear e) throws InventoryFullException {
 
         Gear aux = this.getGear(e);
 
         if (aux == null){
             this.setGear(e);
         } else {
-            inv.addToInventory(this.unequip(aux));
+            Inventory.addToInventory(this.unequip(aux));
             this.setGear(e);
         }
 

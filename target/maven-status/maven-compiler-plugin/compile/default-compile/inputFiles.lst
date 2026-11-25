@@ -6,7 +6,6 @@
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/entities/effects/Evading.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/entities/actions/MagicMissile.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/entities/actions/Wind.java
-/home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/items/Inventory.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/ui/Summary.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/entities/Entity.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/levels/Battle.java
@@ -18,7 +17,6 @@
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/entities/Stats.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/items/Weapon.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/items/Item.java
-/home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/levels/Guild.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/ui/App.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/entities/effects/Undying.java
 /home/caioespindola/projects/pucrs/tf-oop/src/main/java/game/levels/BattleRegistry.java

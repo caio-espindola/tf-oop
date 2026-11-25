@@ -13,4 +13,7 @@ public class Weapon extends Gear {
 
     }
 
+    public String getType() {
+        return "Weapon";
+    }
 }
