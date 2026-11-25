@@ -48,6 +48,8 @@ public class Mahoraga extends Cleric{
         aux.setINT(aux.getINT() + alloc.getINT());
         aux.setPIE(aux.getPIE() + alloc.getPIE());
 
+        this.level_up_available--;
+
         return true;
 
     }

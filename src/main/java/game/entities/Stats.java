@@ -4,11 +4,10 @@ public class Stats {
     
     private int str, dex, intl, pie;
 
-    public enum stats {
-        STR,
-        DEX,
-        INT,
-        PIE
+    public int[] toArray() {
+
+        return new int[]{this.str, this.dex, this.intl, this.pie};
+
     }
 
     public Stats(){

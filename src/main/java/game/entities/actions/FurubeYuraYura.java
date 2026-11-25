@@ -13,7 +13,7 @@ public class FurubeYuraYura extends Ultimate {
 
                 """
                 "I'll be dying first.\n
-                *Good luck.*"
+                Good luck."
                 """,
 
                 """

@@ -2,20 +2,18 @@ package game.entities.heroes;
 
 import game.entities.Entity;
 import game.entities.Stats;
-import game.entities.actions.Action;
 import game.exceptions.InventoryFullException;
 import game.items.*;
-import game.levels.Battle;
-
-import java.util.ArrayList;
 
 public abstract class Hero extends Entity {
 
     private Gear weapon, armor, amulet;
     private int xp;
+
     protected int level_up_available;
 
     private final int MAX_LEVEL = 3;
+    public final int[] MAX_ALLOCS_BY_LEVEL = {0, 100, 100};
     protected abstract int HP_INCREASE();
     protected abstract int MANA_INCREASE();
     protected abstract Stats STARTING_STATS();
@@ -38,31 +36,36 @@ public abstract class Hero extends Entity {
         this.INIT_GEAR();
     }
 
+    public int getLevelUpsAvailable() {
+        return level_up_available;
+    }
+
     public int getXP() {
         return xp;
     }
 
     public boolean canLevelUp(){
-        return this.level_up_available > 0;
+        return this.level_up_available > 0 && this.getLevel() < MAX_LEVEL;
     }
 
     public boolean addXP(int amount){
 
         this.xp += amount;
 
-        if ((this.xp >= 100 * this.getLevel()) && (this.getLevel() < MAX_LEVEL)){
+        if ((this.xp >= 100 * (this.getLevel() + this.level_up_available)) && (this.getLevel() < MAX_LEVEL)){
             this.xp -= 100 * this.getLevel();
             this.level_up_available++;
-            return this.addXP(0);
+            this.addXP(0);
+            return true;
         }
 
         return false;
 
     }
 
-    protected boolean levelUp(Stats alloc){
+    public boolean levelUp(Stats alloc){
 
-        if (this.level_up_available < 1){
+        if (!canLevelUp()){
             return false;
         }
 
@@ -87,6 +90,8 @@ public abstract class Hero extends Entity {
 
         this.setMaxHP(this.getMaxHP() + HP_INCREASE());
         this.setMaxMana(this.getMaxMana() + MANA_INCREASE());
+
+        this.level_up_available--;
 
         return true;
 

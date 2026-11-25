@@ -2,7 +2,6 @@ game/ui/MainView.class
 game/entities/heroes/Mahoraga.class
 game/entities/Entity.class
 game/entities/actions/StealLife.class
-game/entities/Stats$stats.class
 game/entities/creatures/Dragon.class
 game/ui/Chronicles$BattleMock.class
 game/levels/Mission.class

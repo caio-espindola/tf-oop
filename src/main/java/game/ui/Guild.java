@@ -1,17 +1,20 @@
 package game.ui;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-//import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.data.renderer.Renderer;
@@ -24,6 +27,9 @@ import game.entities.heroes.*;
 public class Guild extends VerticalLayout {
 
     private static List<Hero> heroes = new ArrayList<>();
+    private static Grid<Hero> grid;
+    private static Dialog level_up_dialog;
+    private static Stats level_up_alloc;
 
     private void initializeHeroes(){
 
@@ -43,13 +49,74 @@ public class Guild extends VerticalLayout {
         heroes = List.of(aux);
     }
 
-    public Guild() {
+    private static void levelUpHero(Hero h) {
 
-        this.initializeHeroes();
+        level_up_dialog.open();
+        level_up_alloc = null;
+
+        Notification notif = new Notification();
+
+        int max_alloc = h.MAX_ALLOCS_BY_LEVEL[h.getLevel()];
+
+        IntegerField str = new IntegerField();
+        IntegerField dex = new IntegerField();
+        IntegerField intl = new IntegerField();
+        IntegerField pie = new IntegerField();
+        IntegerField[] fields = {str, dex, intl, pie};
+        str.setLabel("STR");
+        dex.setLabel("DEX");
+        intl.setLabel("INT");
+        pie.setLabel("PIE");
+
+        // BUTTONS
+
+        HorizontalLayout buttons = new HorizontalLayout();
+        Button confirm = new Button("Confirm");
+        Button cancel = new Button("Cancel");
+
+        confirm.addClickListener(clickEvent -> {
+
+            int current_alloc = Stream.of(fields).mapToInt(f -> f.getValue()).sum();
+
+            if (current_alloc != max_alloc){
+
+                notif.show("Invalid Point Allocation");
+                notif.setPosition(Notification.Position.MIDDLE);
+
+            } else if (current_alloc == max_alloc){
+                h.levelUp(new Stats(str.getValue(), dex.getValue(), intl.getValue(), pie.getValue()));
+                level_up_dialog.close();
+                grid.setDetailsVisible(h, false);
+            }
+        });
+
+        cancel.addClickListener(clickEvent -> level_up_dialog.close());
+
+        buttons.add(cancel, confirm);
+
+        // ALLOCATOR
+
+        VerticalLayout fields_layout = new VerticalLayout();
+
+        for (IntegerField f : fields){
+            f.setStepButtonsVisible(true);
+            f.setValue(0);
+            f.setMin(0);
+
+            fields_layout.add(f);
+        }
+
+        level_up_dialog.removeAll();
+        level_up_dialog.add(new Paragraph("Points to be Allocated: " + max_alloc), fields_layout, buttons);
+    }
+
+    public Guild() {
 
         add(new H2("Guild Hall"));
 
-        Grid<Hero> grid = new Grid<>(Hero.class, false);
+        // HERO GRID
+
+        grid = new Grid<>(Hero.class, false);
 
         grid.addColumn(toggleDetails(grid)).setWidth("80px").setFlexGrow(0).setFrozen(true);
 
@@ -59,13 +126,21 @@ public class Guild extends VerticalLayout {
         grid.addColumn(Hero::getMaxMana).setHeader("Max Mana");
         grid.addColumn(Hero::getDefense).setHeader("Defense");
 
-
         grid.setDetailsVisibleOnClick(false);
         grid.setItemDetailsRenderer(heroDetailsRenderer());
+        grid.setHeight("800px");
 
+        this.initializeHeroes();
         grid.setItems(heroes);
 
         add(grid);
+
+        // LEVEL UP POPUP
+
+        level_up_dialog = new Dialog("Level Up Hero");
+        level_up_dialog.close();
+
+        add(level_up_dialog);
     }
 
     private static Renderer<Hero> toggleDetails(Grid<Hero> grid){
@@ -95,15 +170,19 @@ public class Guild extends VerticalLayout {
 
         private final VerticalLayout leftPanel = new VerticalLayout();
         private final VerticalLayout rightPanel = new VerticalLayout();
+        private final VerticalLayout midPanel = new VerticalLayout();
 
         private Details s1, s2, s3, s4, w, a, m;
+        private Paragraph str, dex, intl, pie, xp;
+        private Button level_up;
 
-        private Details[] skills;
-        private Details[] gear;
+        private Details[] skills, gear;
+        private Paragraph[] stats;
 
         public HeroDetailLayout(){
 
             leftPanel.add(new H2("Skills"));
+            midPanel.add(new H2("Stats"));
             rightPanel.add(new H2("Gear"));
 
             s1 = new Details();
@@ -115,13 +194,27 @@ public class Guild extends VerticalLayout {
             a = new Details();
             m = new Details();
 
+            str = new Paragraph();
+            dex = new Paragraph();
+            intl = new Paragraph();
+            pie = new Paragraph();
+            xp = new Paragraph();
+
+            level_up = new Button("Level Up");
+            level_up.setEnabled(false);
+
             skills = new Details[]{s1, s2, s3, s4};
             gear = new Details[]{w, a, m};
+            stats = new Paragraph[]{str, dex, intl, pie, xp};
 
             Stream.of(skills).forEach(s -> leftPanel.add(s));
             Stream.of(gear).forEach(s -> rightPanel.add(s));
+            Stream.of(stats).forEach(s -> midPanel.add(s));
+
+            midPanel.add(level_up);
 
             add(leftPanel);
+            add(midPanel);
             add(rightPanel);
 
         }
@@ -145,6 +238,23 @@ public class Guild extends VerticalLayout {
                 gear[i].setSummaryText(gear_name);
                 gear[i].add(new Paragraph(gear_bonuses));
             }
+
+            for (int i = 0; i < 4; i++){
+
+                String stat_name = new String[]{"STR", "DEX", "INT", "PIE"}[i];
+                int stat_val = h.getStats().toArray()[i];
+
+                stats[i].setText(stat_name + ": " + stat_val);
+
+            }
+
+            h.addXP(120);
+
+            int xp_val = h.getXP();
+            stats[4].setText("XP: " + xp_val + " / " + 100*h.getLevel()); // TODO: fix this bullshit
+
+            level_up.setEnabled(h.canLevelUp());
+            level_up.addClickListener(clickEvent -> Guild.levelUpHero(h));
 
         }
 
