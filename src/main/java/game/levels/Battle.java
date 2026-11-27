@@ -4,6 +4,7 @@ import game.entities.Entity;
 import game.entities.PlaceHolder;
 import game.entities.creatures.Creature;
 import game.entities.heroes.Hero;
+import game.ui.Arena;
 
 public class Battle {
 
@@ -71,8 +72,8 @@ public class Battle {
 
     public Battle(){
 
-        this.heroes = new Hero[4];
-        this.enemies = new Creature[5];
+        this.heroes = new Entity[4];
+        this.enemies = new Entity[5];
 
         turn = count = active_pos = 0;
 
@@ -140,16 +141,16 @@ public class Battle {
     public boolean add(Entity e, Position p){
 
         if (e instanceof Hero){
-            return this.add(e, p);
+            return this.add((Hero) e, p);
         } else if (e instanceof Creature){
-            return this.add(e, p);
+            return this.add((Creature) e, p);
         } else if (e instanceof PlaceHolder){
             
             if (p.ordinal() < 4){
                 this.heroes[p.ordinal()] = e;
                 this.count++;
             } else if (p.ordinal() >= 4 && p.ordinal() < 9){
-                this.enemies[p.ordinal()] = e;
+                this.enemies[p.ordinal() - 4] = e;
                 this.count++;
             } else {
                 return false;
@@ -166,10 +167,11 @@ public class Battle {
     private boolean add(Hero h, Position p){
 
         if (p.onRight()){
+            System.out.println("ON WRONG SIDE");
             return false;
         }
 
-        if (! (getFromPosition(p) instanceof PlaceHolder)){
+        if ((! (getFromPosition(p) instanceof PlaceHolder)) && (getFromPosition(p) != null)){
             return false;
         }
 
@@ -182,10 +184,11 @@ public class Battle {
     private boolean add(Creature c, Position p){
 
         if (p.onLeft()){
+            System.out.println("ON WRONG SIDE");
             return false;
         }
 
-        if (! (getFromPosition(p) instanceof PlaceHolder)){
+        if ((! (getFromPosition(p) instanceof PlaceHolder)) && (getFromPosition(p) != null)){
             return false;
         }
 
@@ -198,9 +201,9 @@ public class Battle {
     public boolean move(Entity e, Position p){
 
         if (e instanceof Hero){
-            return this.move(e, p);
+            return this.move((Hero) e, p);
         } else if (e instanceof Creature){
-            return this.move(e, p);
+            return this.move((Creature) e, p);
         } else {
             return false;
         }
@@ -259,19 +262,31 @@ public class Battle {
 
         int victory = 0;
 
-        for (int i = 0; !getFromPosition(Position.atIndex(i)).isAlive(); i++){
-            if (i >= 3){
-                victory = -1;
-                break;
+        for (int i = 0; i < 8; i++){
+            Entity e = getFromPosition(Position.atIndex(i));
+            System.out.println("Entity " + e.getName() + " alive: " + e.isAlive());
+        }
+
+        boolean enemy_victory = true;
+        for (int i = 0; i < 4; i++){
+            if (getFromPosition(Position.atIndex(i)).isAlive()){
+                enemy_victory = false;
             }
         }
 
-        for (int i = 4; !getFromPosition(Position.atIndex(i)).isAlive(); i++){
-            if (i >= 8){
-                victory = 1;
-                break;
+        boolean hero_victory = true;
+        for (int i = 4; i < 8; i++){
+            if (getFromPosition(Position.atIndex(i)).isAlive()){
+                hero_victory = false;
             }
         }
+
+        if (hero_victory && enemy_victory){
+            throw new RuntimeException("Mutual Conditions on checkVictory()");
+        }
+
+        victory = hero_victory? 1 :
+                    enemy_victory? -1 : 0;
 
         if (victory == 1){
             end(true);
@@ -286,7 +301,7 @@ public class Battle {
 
     }
 
-    private void passActive(){
+    public void passActive(){
 
         active_pos++;
 
@@ -304,7 +319,8 @@ public class Battle {
         }
 
         current.passEffects();
-        current.action();
+
+        Arena.setActiveEntity(current);
 
     }
 
@@ -337,6 +353,8 @@ public class Battle {
         }
 
         // revive cleric in case of mahoraga summon
+
+        Arena.enableEnd();
     }
 
 }

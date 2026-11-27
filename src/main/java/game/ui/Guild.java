@@ -27,7 +27,7 @@ import game.items.Weapon;
 @Route(value = "guild", layout = MainLayout.class)
 public class Guild extends VerticalLayout {
 
-    private static List<Hero> heroes = new ArrayList<>();
+    private static ArrayList<Hero> heroes = new ArrayList<>();
     private static Grid<Hero> grid;
     private static Dialog level_up_dialog;
 
@@ -46,7 +46,7 @@ public class Guild extends VerticalLayout {
         add(level_up_dialog);
     }
 
-    public static List<Hero> getHeroes(){
+    public static ArrayList<Hero> getHeroes(){
         return heroes;
     }
 
@@ -60,12 +60,10 @@ public class Guild extends VerticalLayout {
             }
         }
 
-        aux[0] = new Warrior(150, 20,  50, 1);
-        aux[1] = new Archer(120, 45,  50, 1);
-        aux[2] = new Mage(60,  100, 50, 1);
-        aux[3] = new Cleric(90,  75,  50, 1);
-
-        heroes = List.of(aux);
+        heroes.add(new Warrior(150, 20,  50, 1));
+        heroes.add(new Archer(120, 45,  50, 1));
+        heroes.add(new Mage(60,  100, 50, 1));
+        heroes.add(new Cleric(90,  75,  50, 1));
     }
 
     private static Grid<Hero> createHeroGrid(){

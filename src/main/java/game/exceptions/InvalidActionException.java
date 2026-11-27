@@ -1,6 +1,6 @@
 package game.exceptions;
 
-public class InvalidActionException extends RuntimeException {
+public class InvalidActionException extends GameException {
 
     public InvalidActionException(String message) {
         super(message);

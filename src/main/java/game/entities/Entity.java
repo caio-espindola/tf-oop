@@ -295,9 +295,15 @@ public abstract class Entity implements Combatant {
         aux.add(new Move());
 
         for (Action a : this.getAllSkills()){
+            if (a == null){continue;}
             aux.add(a);
         }
 
         return aux;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

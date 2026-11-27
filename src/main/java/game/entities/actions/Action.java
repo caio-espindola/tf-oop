@@ -18,4 +18,8 @@ public abstract class Action {
 
     public abstract boolean act(Battle b, Entity user, Entity target) throws InvalidTargetException, NotEnoughManaException, OutOfRangeException, InvalidActionException;
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
